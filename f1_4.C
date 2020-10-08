@@ -36,7 +36,7 @@ void f1_4(){
   auto dtsx(0.05), dtsy(0.05);
   auto dtox(1.30), dtoy(1.10);
   
-  TString stnx("#it{M}_{#LambdaK^{-}} (GeV/#it{c}^{2})");
+  TString stnx("#it{M}_{#LambdaK} (GeV/#it{c}^{2})");
   TString stny("Count");
   
   SetStyle(kTRUE);
@@ -61,7 +61,7 @@ void f1_4(){
   tex->SetNDC();
   tex->SetTextSizePixels(24);
   tex->DrawLatex(0.16, 0.92, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV, |#eta| < 0.75");
-  tex->DrawLatex(0.86, 0.9, "#Omega");
+  tex->DrawLatex(0.8, 0.9, "#Omega #rightarrow #LambdaK");
   tex->DrawLatex(0.76, 0.8, "1.2 < #it{p}_{T} < 1.6");
 
   can->SaveAs(Form("./figure/eps/%s.eps", can->GetName()));

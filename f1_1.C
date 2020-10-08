@@ -61,7 +61,7 @@ void f1_1(){
   tex->SetNDC();
   tex->SetTextSizePixels(24);
   tex->DrawLatex(0.16, 0.92, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV, |#eta| < 0.75");
-  tex->DrawLatex(0.86, 0.9, "K^{0}_{S}");
+  tex->DrawLatex(0.8, 0.9, "K^{0}_{S} #rightarrow #pi^{+}#pi^{-}");
   tex->DrawLatex(0.76, 0.8, "0.7 < #it{p}_{T} < 0.8");
   
   can->SaveAs(Form("./figure/eps/%s.eps", can->GetName()));
