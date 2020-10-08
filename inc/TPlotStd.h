@@ -31,3 +31,43 @@ void CanvasEnd(TCanvas* const c)
 
   return;
 }
+
+TPad* MakePadT(TString sName)
+{
+  TPad *p = new TPad(Form("c%s_U",sName.Data()), Form("%s_U",sName.Data()), 0., 0.35, 1., 1.);
+  p->Range(0., 0., 1., 1.);
+  p->SetFillColor(0);
+  p->SetBorderMode(0);
+  p->SetBorderSize(0);
+  p->SetRightMargin(0.03);
+  p->SetLeftMargin(0.12);
+  p->SetTopMargin(0.02);
+  p->SetBottomMargin(0.);
+  p->SetFrameFillStyle(0);
+  p->SetFrameBorderMode(0);
+  p->Draw();
+  p->cd();
+
+  return p;
+}
+
+//_____________________________________________________________________________
+TPad* MakePadB(TString sName)
+{
+  TPad *p = new TPad(Form("c%s_D",sName.Data()), Form("%s_D",sName.Data()), 0., 0. , 1., 0.35);
+  p->Range(0., 0., 1., 1.);
+  p->SetFillColor(0);
+  p->SetBorderMode(0);
+  p->SetBorderSize(0);
+  p->SetRightMargin(0.03);
+  p->SetLeftMargin(0.12);
+  p->SetTopMargin(0.);
+  p->SetBottomMargin(0.28);
+  p->SetFrameFillStyle(0);
+  p->SetFrameBorderMode(0);
+  p->Draw();
+  p->cd();
+
+  return p;
+}
+
