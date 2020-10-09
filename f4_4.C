@@ -32,9 +32,9 @@ void f4_4(){
   hfm->GetYaxis()->SetNdivisions(510);
 
   DrawHisto(h[0], wcl[0], wmk[0], "same"); DrawGraph(gE[0], wcl[0], "E2");
-  DrawHisto(h[1], wcl[3], wmk[3], "same"); DrawGraph(gE[1], wcl[3], "E2");
-  DrawHisto(h[2], wcl[2], wmk[2], "same"); DrawGraph(gE[2], wcl[2], "E2");
-  DrawHisto(h[3], wcl[1], wmk[1], "same"); DrawGraph(gE[3], wcl[1], "E2");
+  DrawHisto(h[1], wcl[3], wmk[0], "same"); DrawGraph(gE[1], wcl[3], "E2");
+  DrawHisto(h[2], wcl[2], wmk[0], "same"); DrawGraph(gE[2], wcl[2], "E2");
+  DrawHisto(h[3], wcl[1], wmk[0], "same"); DrawGraph(gE[3], wcl[1], "E2");
 
   auto leg(new TLegend(0.72, 0.65, 0.98, 0.86)); SetupLegend(leg);
   leg->AddEntry(h[0], "Inclusive", "LP")->SetTextSizePixels(24);

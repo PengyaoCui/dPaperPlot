@@ -16,5 +16,17 @@ root -l -b -q f5_1.C
 root -l -b -q f5_2.C
 root -l -b -q f5_3.C
 root -l -b -q f5_4.C
-root -l -b -q f5_5.C
-root -l -b -q f5_6.C
+root -l -b -q f6_1.C
+root -l -b -q f6_2.C
+root -l -b -q f6_3.C
+root -l -b -q f6_4.C
+root -l -b -q f6_5.C
+root -l -b -q f6_6.C
+root -l -b -q f7_1.C
+root -l -b -q f7_2.C
+root -l -b -q f7_3.C
+root -l -b -q f8_1.C
+root -l -b -q f8_2.C
+root -l -b -q f8_3.C
+
+cp ./figure/pdf/* /home/cuipengyao/Desktop/Writting/paper/figures/results
