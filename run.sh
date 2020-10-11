@@ -41,4 +41,11 @@ root -l -b -q f8_4.C
 root -l -b -q f8_5.C
 root -l -b -q f8_6.C
 
+root -l -b -q f9_1.C
+root -l -b -q f9_2.C
+root -l -b -q f9_3.C
+root -l -b -q f9_4.C
+root -l -b -q f9_5.C
+root -l -b -q f9_6.C
+
 cp ./figure/pdf/* /home/cuipengyao/Desktop/Writting/paper/figures/results
