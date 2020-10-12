@@ -36,7 +36,7 @@ void f9_3(){
   hfm->GetYaxis()->SetNdivisions(505);
   
   DrawHisto(h[0], wcl[0], wmk[0], "same"); DrawGraph(gE[0], wcl[0], "E2");
-  DrawHisto(h[1], wcl[4], wmk[0], "same"); DrawGraph(gE[1], wcl[4], "E2");
+  DrawHisto(h[1], wcl[4], wmk[2], "same"); DrawGraph(gE[1], wcl[4], "E2");
   
   auto leg(new TLegend(0.75, 0.50, 1., 0.75)); SetupLegend(leg);
   leg->AddEntry(h[0], "p-Pb", "LP")->SetTextSizePixels(24);

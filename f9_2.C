@@ -42,7 +42,7 @@ void f9_2(){
   DrawHisto(h[1], wcl[1], wmk[0], "same"); DrawGraph(gE[1], wcl[1], "E2");
   DrawHisto(h[2], wcl[2], wmk[0], "same"); DrawGraph(gE[2], wcl[2], "E2");
   DrawHisto(h[3], wcl[3], wmk[0], "same"); DrawGraph(gE[3], wcl[3], "E2");
-  DrawHisto(h[4], wcl[4], wmk[0], "same"); DrawGraph(gE[4], wcl[4], "E2");
+  DrawHisto(h[4], wcl[4], wmk[2], "same"); DrawGraph(gE[4], wcl[4], "E2");
   
   auto leg(new TLegend(0.75, 0.50, 1., 0.75)); SetupLegend(leg);
   leg->AddEntry(h[0], "0-100%", "LP")->SetTextSizePixels(24);
