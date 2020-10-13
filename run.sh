@@ -1,51 +1,51 @@
 #!/bin/bash
 
-root -l -b -q f1_1.C
-root -l -b -q f1_2.C
-root -l -b -q f1_3.C
-root -l -b -q f1_4.C
+root -l -b -q f01_1.C
+root -l -b -q f01_2.C
+root -l -b -q f01_3.C
+root -l -b -q f01_4.C
 
-root -l -b -q f2_1.C
-root -l -b -q f2_2.C
-root -l -b -q f3_1.C
-root -l -b -q f3_2.C
+root -l -b -q f02_1.C
+root -l -b -q f02_2.C
+root -l -b -q f03_1.C
+root -l -b -q f03_2.C
 
-root -l -b -q f4_1.C
-root -l -b -q f4_2.C
-root -l -b -q f4_3.C
-root -l -b -q f4_4.C
+root -l -b -q f04_1.C
+root -l -b -q f04_2.C
+root -l -b -q f04_3.C
+root -l -b -q f04_4.C
 
-root -l -b -q f5_1.C
-root -l -b -q f5_2.C
-root -l -b -q f5_3.C
-root -l -b -q f5_4.C
+root -l -b -q f05_1.C
+root -l -b -q f05_2.C
+root -l -b -q f05_3.C
+root -l -b -q f05_4.C
 
-root -l -b -q f6_1.C
-root -l -b -q f6_2.C
-root -l -b -q f6_3.C
-root -l -b -q f6_4.C
-root -l -b -q f6_5.C
-root -l -b -q f6_6.C
+root -l -b -q f06_1.C
+root -l -b -q f06_2.C
+root -l -b -q f06_3.C
+root -l -b -q f06_4.C
+root -l -b -q f06_5.C
+root -l -b -q f06_6.C
 
-root -l -b -q f7_1.C
-root -l -b -q f7_2.C
-root -l -b -q f7_3.C
-root -l -b -q f7_4.C
-root -l -b -q f7_5.C
-root -l -b -q f7_6.C
+root -l -b -q f07_1.C
+root -l -b -q f07_2.C
+root -l -b -q f07_3.C
+root -l -b -q f07_4.C
+root -l -b -q f07_5.C
+root -l -b -q f07_6.C
 
-root -l -b -q f8_1.C
-root -l -b -q f8_2.C
-root -l -b -q f8_3.C
-root -l -b -q f8_4.C
-root -l -b -q f8_5.C
-root -l -b -q f8_6.C
+root -l -b -q f08_1.C
+root -l -b -q f08_2.C
+root -l -b -q f08_3.C
+root -l -b -q f08_4.C
+root -l -b -q f08_5.C
+root -l -b -q f08_6.C
 
-root -l -b -q f9_1.C
-root -l -b -q f9_2.C
-root -l -b -q f9_3.C
-root -l -b -q f9_4.C
-root -l -b -q f9_5.C
-root -l -b -q f9_6.C
+root -l -b -q f09_1.C
+root -l -b -q f09_2.C
+root -l -b -q f09_3.C
+root -l -b -q f09_4.C
+root -l -b -q f09_5.C
+root -l -b -q f09_6.C
 
 cp ./figure/pdf/* /home/cuipengyao/Desktop/Writting/paper/figures/results
