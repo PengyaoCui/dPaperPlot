@@ -23,6 +23,7 @@ void f07_5(){
   TString stny("(#Omega^{-} + #bar{#Omega}^{+}) / (#Lambda + #bar{#Lambda})");
  
   SetStyle(kTRUE);
+  gStyle->SetErrorX(0);
 
   auto can(MakeCanvas("f07_5"));
   auto hfm(can->DrawFrame(dflx, dfly, dfux, dfuy));

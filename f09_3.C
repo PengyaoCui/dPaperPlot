@@ -28,6 +28,7 @@ void f09_3(){
   TString stny("(#Omega^{-} + #bar{#Omega}^{+}) / 2K_{S}^{0}");
  
   SetStyle(kTRUE);
+  gStyle->SetErrorX(0);
 
   auto can(MakeCanvas("f09_3"));
   auto hfm(can->DrawFrame(dflx, dfly, dfux, dfuy));

@@ -37,6 +37,7 @@ void f10_2(){
   TString stny("d#it{#rho}/d#it{p}_{T} (GeV/#it{c} rad)^{-1}");
   
   SetStyle(kTRUE);
+  gStyle->SetErrorX(0);
   
   auto can(MakeCanvas(Form("f10_2")));
   can->SetLogy();

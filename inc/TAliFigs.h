@@ -12,8 +12,8 @@
 
 const Color_t wcl[] = { kBlack,  kRed+1,  kBlue+1, kGreen+3, kMagenta+1, kOrange-1, kCyan+2, kYellow+2 };
 const Color_t wcf[] = { kGray+1, kRed-10, kBlue-9, kGreen-8, kMagenta-9, kOrange-9, kCyan-8, kYellow-7 };
-const Style_t wmk[] = { kFullCircle, kFullSquare, kOpenCircle,  kOpenSquare, kOpenDiamond,
-                        kOpenCross,  kFullCross,  kFullDiamond, kFullStar,   kOpenStar };
+const Style_t wmk[] = { kFullCircle, kOpenCircle, kFullSquare, kFullTriangleDown, kOpenSquare, kOpenDiamond,
+                        kOpenCross,  kFullCross, kFullDiamond, kFullStar,   kOpenStar };
 //=============================================================================
 
 void DrawAliLogo(const Double_t dX, const Double_t dY, const Bool_t b=kTRUE, const Int_t k=24)
@@ -216,7 +216,7 @@ void SetStyle(const Bool_t bGraph=kFALSE)
 
   gStyle->SetTextFont(42);
   gStyle->SetTextSizePixels(24);
-
+  
 //gStyle->SetTickLength(0.04,"X");
 //gStyle->SetTickLength(0.04,"Y");
 

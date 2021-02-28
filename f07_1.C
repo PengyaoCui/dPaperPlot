@@ -24,6 +24,7 @@ void f07_1(){
   TString stny("(#Lambda + #bar{#Lambda}) / 2K_{S}^{0}");
  
   SetStyle(kTRUE);
+  gStyle->SetErrorX(0);
 
   auto can(MakeCanvas("f07_1"));
   auto hfm(can->DrawFrame(dflx, dfly, dfux, dfuy));

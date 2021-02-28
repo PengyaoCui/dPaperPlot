@@ -23,6 +23,7 @@ void f07_2(){
   TString stny("(#Xi^{-} + #bar{#Xi}^{+}) / 2K_{S}^{0}");
  
   SetStyle(kTRUE);
+  gStyle->SetErrorX(0);
 
   auto can(MakeCanvas("f07_2"));
   auto hfm(can->DrawFrame(dflx, dfly, dfux, dfuy));

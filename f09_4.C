@@ -31,6 +31,7 @@ void f09_4(){
   TString stny("(#Xi^{-} + #bar{#Xi}^{+}) / (#Lambda + #bar{#Lambda})");
  
   SetStyle(kTRUE);
+  gStyle->SetErrorX(0);
 
   auto can(MakeCanvas("f09_4"));
   auto hfm(can->DrawFrame(dflx, dfly, dfux, dfuy));

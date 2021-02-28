@@ -23,6 +23,7 @@ void f05_4(){
   TString stny("d#it{#rho}/d#it{p}_{T} (GeV/#it{c} rad)^{-1}");
   
   SetStyle(kTRUE);
+  gStyle->SetErrorX(0);
   
   auto can(MakeCanvas("f05_4"));
   can->SetLogy();
@@ -32,25 +33,25 @@ void f05_4(){
   hfm->GetYaxis()->SetNdivisions(510);
 
   DrawHisto(h[0], wcl[0], wmk[0], "same"); DrawGraph(gE[0], wcl[0], "E2");
-  DrawHisto(h[1], wcl[3], wmk[0], "same"); DrawGraph(gE[1], wcl[3], "E2");
-  DrawHisto(h[2], wcl[2], wmk[0], "same"); DrawGraph(gE[2], wcl[2], "E2");
-  DrawHisto(h[3], wcl[1], wmk[0], "same"); DrawGraph(gE[3], wcl[1], "E2");
+  DrawHisto(h[1], wcl[3], wmk[2], "same"); DrawGraph(gE[1], wcl[3], "E2");
+  DrawHisto(h[2], wcl[2], wmk[1], "same"); DrawGraph(gE[2], wcl[2], "E2");
+  DrawHisto(h[3], wcl[1], wmk[3], "same"); DrawGraph(gE[3], wcl[1], "E2");
 
-  auto leg(new TLegend(0.72, 0.65, 0.98, 0.86)); SetupLegend(leg);
-  leg->AddEntry(h[0], "Inclusive", "LP")->SetTextSizePixels(24);
-  leg->AddEntry(h[1], "JC", "LP")->SetTextSizePixels(24);
-  leg->AddEntry(h[2], "UE", "LP")->SetTextSizePixels(24);
-  leg->AddEntry(h[3], "JE", "LP")->SetTextSizePixels(24);
+  auto leg(new TLegend(0.63, 0.63, 0.98, 0.88)); SetupLegend(leg);
+  leg->AddEntry(h[0], "Inclusive", "P")->SetTextSizePixels(24);
+  leg->AddEntry(h[2], "Perp. cone", "P")->SetTextSizePixels(24);
+  leg->AddEntry(h[1], "#it{R}(#Omega, jet) < 0.4", "P")->SetTextSizePixels(24);
+  leg->AddEntry(h[3], "#Omega in jets", "P")->SetTextSizePixels(24);
   //leg->AddEntry(gE[0], "Sys. Error", "f")->SetTextSizePixels(24);
   leg->Draw();
 
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(24);
-  tex->DrawLatex(0.16, 0.92, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV, 0-100%");
-  tex->DrawLatex(0.55, 0.3, "#it{R}(#Omega, jet) < 0.4, |#eta_{#Omega}| < 0.75");
+  tex->DrawLatex(0.16, 0.9, "p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV, 0-100%");
+  tex->DrawLatex(0.55, 0.3, "#Omega^{-} + #bar{#Omega}^{+}, |#eta_{#Omega}| < 0.75");
   tex->DrawLatex(0.25, 0.2, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
-  tex->DrawLatex(0.84, 0.9, "#Omega^{-} + #bar{#Omega}^{+}");
+  tex->DrawLatex(0.82, 0.9, "ALICE");
   
   can->SaveAs(Form("./figure/eps/%s.eps", can->GetName()));
   can->SaveAs(Form("./figure/pdf/%s.pdf", can->GetName()));
