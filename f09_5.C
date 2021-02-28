@@ -18,7 +18,7 @@ void f09_5(){
   }
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(0.), dfuy(0.11);
+  auto dfly(0.), dfuy(0.17);
   
   auto dlsx(0.05), dlsy(0.05);
   auto dtsx(0.05), dtsy(0.05);
@@ -34,20 +34,25 @@ void f09_5(){
   auto hfm(can->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm, stnx, stny, dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm->GetXaxis()->SetNdivisions(510);
-  hfm->GetYaxis()->SetNdivisions(505);
+  hfm->GetYaxis()->SetNdivisions(503);
   
   DrawHisto(h[0], wcl[0], wmk[0], "same"); DrawGraph(gE[0], wcl[0], "E2");
-  DrawHisto(h[1], wcl[4], wmk[2], "same"); DrawGraph(gE[1], wcl[4], "E2");
+  DrawHisto(h[1], wcl[4], wmk[4], "same"); DrawGraph(gE[1], wcl[4], "E2");
   
   auto leg(new TLegend(0.75, 0.50, 1., 0.75)); SetupLegend(leg);
-  leg->AddEntry(h[0], "p-Pb", "LP")->SetTextSizePixels(24);
-  leg->AddEntry(h[1], "pp", "LP")->SetTextSizePixels(24);
+  leg->AddEntry(h[0], "p-Pb", "P")->SetTextSizePixels(24);
+  leg->AddEntry(h[1], "pp", "P")->SetTextSizePixels(24);
   leg->Draw();
 
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(24);
-  tex->DrawLatex(0.16, 0.92, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV, pp #sqrt{#it{s}} = 13 TeV"); tex->DrawLatex(0.16, 0.82, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35"); tex->DrawLatex(0.16, 0.72, "#it{R}(particle, jet) < 0.4, |#eta_{particle}| < 0.75"); 
+  tex->DrawLatex(0.16, 0.9, "p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV and pp #sqrt{#it{s}} = 13 TeV");
+  tex->DrawLatex(0.82, 0.9, "ALICE");
+  tex->DrawLatex(0.16, 0.8, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
+  tex->DrawLatex(0.16, 0.7, "#it{R}(particle, jet) < 0.4, |#eta_{particle}| < 0.75");
+  tex->DrawLatex(0.16, 0.6, "Particles in jets, UE subtracted");
+  
   can->SaveAs(Form("./figure/eps/%s.eps", can->GetName()));
   can->SaveAs(Form("./figure/pdf/%s.pdf", can->GetName()));
   can->SaveAs(Form("./figure/png/%s.png", can->GetName()));

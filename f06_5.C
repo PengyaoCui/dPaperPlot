@@ -52,7 +52,8 @@ void f06_5(){
   tex->SetTextSizePixels(24);
   tex->DrawLatex(0.16, 0.9, "p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV");
   tex->DrawLatex(0.82, 0.9, "ALICE");
-  tex->DrawLatex(0.16, 0.3, "#Lambda + #bar{#Lambda} in jets, |#eta_{#Lambda}| < 0.75");
+  tex->DrawLatex(0.16, 0.4, "#Lambda + #bar{#Lambda} in jets, UE subtracted");
+  tex->DrawLatex(0.16, 0.3, "#it{R}(#Lambda, jet) < 0.4, |#eta_{#Lambda}| < 0.75");
   tex->DrawLatex(0.16, 0.2, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
 
 
