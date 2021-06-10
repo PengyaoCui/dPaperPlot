@@ -32,23 +32,24 @@ void f07_2(){
   hfm->GetYaxis()->SetNdivisions(503);
 
   DrawHisto(h[0], wcl[0], wmk[0], "same"); DrawGraph(gE[0], wcl[0], "E2");
-  DrawHisto(h[1], wcl[3], wmk[0], "same"); DrawGraph(gE[1], wcl[3], "E2");
-  DrawHisto(h[2], wcl[2], wmk[0], "same"); DrawGraph(gE[2], wcl[2], "E2");
-  DrawHisto(h[3], wcl[1], wmk[0], "same"); DrawGraph(gE[3], wcl[1], "E2");
+  DrawHisto(h[1], wcl[3], wmk[2], "same"); DrawGraph(gE[1], wcl[3], "E2");
+  DrawHisto(h[2], wcl[2], wmk[1], "same"); DrawGraph(gE[2], wcl[2], "E2");
+  DrawHisto(h[3], wcl[1], wmk[3], "same"); DrawGraph(gE[3], wcl[1], "E2");
 
-  auto leg(new TLegend(0.72, 0.5, 0.98, 0.75)); SetupLegend(leg);
-  leg->AddEntry(h[0], "Inclusive", "LP")->SetTextSizePixels(24);
-  leg->AddEntry(h[1], "JC", "LP")->SetTextSizePixels(24);
-  leg->AddEntry(h[2], "UE", "LP")->SetTextSizePixels(24);
-  leg->AddEntry(h[3], "JE", "LP")->SetTextSizePixels(24);
+  auto leg(new TLegend(0.55, 0.5, 0.98, 0.75)); SetupLegend(leg);
+  leg->AddEntry(h[0], "Inclusive", "P")->SetTextSizePixels(24);
+  leg->AddEntry(h[2], "Perp. cone", "P")->SetTextSizePixels(24);
+  leg->AddEntry(h[1], "#it{R}(particle, jet) < 0.4", "P")->SetTextSizePixels(24);
+  leg->AddEntry(h[3], "Particles in jets", "P")->SetTextSizePixels(24);
   leg->Draw();
 
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(24);
-  tex->DrawLatex(0.16, 0.92, "ALICE pp #sqrt{#it{s}} = 13 TeV");
-  tex->DrawLatex(0.16, 0.82, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
-  tex->DrawLatex(0.16, 0.72, "#it{R}(particle, jet) < 0.4, |#eta_{particle}| < 0.75");
+  tex->DrawLatex(0.16, 0.9, "pp #sqrt{#it{s}} = 13 TeV");
+  tex->DrawLatex(0.82, 0.9, "ALICE");
+  tex->DrawLatex(0.16, 0.8, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
+  tex->DrawLatex(0.16, 0.7, "|#eta_{particle}| < 0.75");
   
   //tex->DrawLatex(0.16, 0.82, "#frac{#Xi^{-} + #bar{#Xi}^{+}}{2K^{0}_{S}}");
   
