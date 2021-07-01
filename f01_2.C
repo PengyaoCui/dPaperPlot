@@ -33,8 +33,8 @@ void f01_2(){
   auto dfly(2e3), dfuy(3e6);
   
   auto dlsx(0.05), dlsy(0.05);
-  auto dtsx(0.05), dtsy(0.05);
-  auto dtox(1.30), dtoy(1.10);
+  auto dtsx(0.06), dtsy(0.06);
+  auto dtox(1.20), dtoy(1.0);
   
   TString stnx("#it{M}_{p#pi} (GeV/#it{c}^{2})");
   TString stny("Count");
@@ -60,9 +60,9 @@ void f01_2(){
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(24);
-  tex->DrawLatex(0.16, 0.92, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV, |#eta| < 0.75");
+  tex->DrawLatex(0.16, 0.9, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV, |#eta| < 0.75");
   tex->DrawLatex(0.8, 0.9, "#Lambda #rightarrow p#pi");
-  tex->DrawLatex(0.76, 0.8, "0.7 < #it{p}_{T} < 0.8");
+  tex->DrawLatex(0.65, 0.8, "0.7 < #it{p}_{T} < 0.8 GeV/#it{c}");
 
   can->SaveAs(Form("./figure/eps/%s.eps", can->GetName()));
   can->SaveAs(Form("./figure/pdf/%s.pdf", can->GetName()));

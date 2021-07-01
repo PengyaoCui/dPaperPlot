@@ -53,4 +53,4 @@ root -l -b -q f10_2.C
 root -l -b -q f10_3.C
 root -l -b -q f10_4.C
 
-cp ./figure/pdf/* /home/cuipengyao/Desktop/Writting/paper/figures/results
+cp ./figure/pdf/* /home/cuipengyao/Desktop/Writting/paper/update/figures/results 
