@@ -20,11 +20,11 @@ void f02_1(){
   } 
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(0.0001), dfuy(0.75);
+  auto dfly(0.0001), dfuy(0.65);
   
-  auto dlsx(0.05), dlsy(0.06);
-  auto dtsx(0.05), dtsy(0.06);
-  auto dtox(1.30), dtoy(0.80);
+  auto dlsx(0.07), dlsy(0.07);
+  auto dtsx(0.08), dtsy(0.08);
+  auto dtox(1.30), dtoy(0.70);
   
   TString stnx("#it{p}_{T} (GeV/#it{c})");
   TString stny("Efficiency");
@@ -42,34 +42,34 @@ void f02_1(){
   
   for(Int_t i =0; i<n; i++){
     DrawHisto(hIn[i], wcl[i], wmk[0], "same");
-    DrawHisto(hJE[i], wcl[i], wmk[2], "same");
+    DrawHisto(hJE[i], wcl[i], wmk[1], "same");
   }
 
-  auto leg(new TLegend(0.83, 0.40, 1.1, 0.76)); SetupLegend(leg);
+  auto leg(new TLegend(0.83, 0.40, 1.1, 0.85)); SetupLegend(leg);
   auto Leg(new TLegend(0.55, 0.50, 0.8, 0.75)); SetupLegend(leg);
   //leg -> SetNColumns(3);
   for(Int_t i =0; i<n; i++){
     leg->AddEntry(hIn[i], sLeg[i], "L")->SetTextSizePixels(20);
   
   }
-  Leg->AddEntry(hIn[0], "Inclusive", "LP")->SetTextSizePixels(20);
-  Leg->AddEntry(hJE[0], "#it{R}(Par, jet) < 0.4", "LP")->SetTextSizePixels(20);
+  Leg->AddEntry(hIn[0], "Inclusive", "P")->SetTextSizePixels(20);
+  Leg->AddEntry(hJE[0], "#it{R}(par, jet) < 0.4", "P")->SetTextSizePixels(20);
   Leg->Draw();
   leg->Draw();
 
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(20);
-  tex->DrawLatex(0.16, 0.91, "ALICE pp #sqrt{#it{s}} = 13 TeV, |#eta| < 0.75");
-  tex->DrawLatex(0.16, 0.81, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
+  tex->DrawLatex(0.16, 0.89, "ALICE pp #sqrt{#it{s}} = 13 TeV, |#eta| < 0.75");
+  tex->DrawLatex(0.16, 0.78, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
 
   can->cd();
   padB->cd(); 
   dfly = 0.8, dfuy = 1.5999;
   
-  dlsx = 0.11; dlsy = 0.11;
-  dtsx = 0.11; dtsy = 0.11;
-  dtox = 1.10; dtoy = 0.40;
+  dlsx = 0.14; dlsy = 0.14;
+  dtsx = 0.14; dtsy = 0.14;
+  dtox = 0.95; dtoy = 0.40;
   stny = "Ratio to inclusive";
   
   auto hfmb(padB->DrawFrame(dflx, dfly, dfux, dfuy));
@@ -79,7 +79,7 @@ void f02_1(){
   hfmb->GetXaxis()->SetTickLength(0.07);
   
   for(Int_t i =0; i<n; i++){
-    DrawHisto(hR[i], wcl[i], wmk[3], "same");
+    DrawHisto(hR[i], wcl[i], wmk[1], "same");
   }
 
   can->SaveAs(Form("./figure/eps/%s.eps", can->GetName()));

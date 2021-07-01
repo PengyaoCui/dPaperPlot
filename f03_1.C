@@ -19,11 +19,11 @@ void f03_1(){
 
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(0.), dfuy(0.3);
+  auto dfly(0.), dfuy(0.32);
   
   auto dlsx(0.05), dlsy(0.05);
-  auto dtsx(0.05), dtsy(0.05);
-  auto dtox(1.30), dtoy(1.10);
+  auto dtsx(0.06), dtsy(0.06);
+  auto dtox(1.10), dtoy(1.0);
   
   TString stnx("#it{p}_{T} (GeV/#it{c})");
   TString stny("Feed-dow fraction");
@@ -33,29 +33,29 @@ void f03_1(){
   auto can(MakeCanvas("f03_1"));
   auto hfm(can->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm, stnx, stny, dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
-  hfm->GetXaxis()->SetNdivisions(505);
+  hfm->GetXaxis()->SetNdivisions(510);
   hfm->GetYaxis()->SetNdivisions(505);
 
   DrawHisto(hIn[0], wcl[0], wmk[0], "same");
-  DrawHisto(hJE[0], wcl[0], wmk[2], "same");
+  DrawHisto(hJE[0], wcl[0], wmk[1], "same");
   
   DrawHisto(hIn[1], wcl[1], wmk[0], "same");
-  DrawHisto(hJE[1], wcl[1], wmk[2], "same");
+  DrawHisto(hJE[1], wcl[1], wmk[1], "same");
 
-  auto leg(new TLegend(0.56, 0.70, 1.1, 0.82)); SetupLegend(leg);
+  auto leg(new TLegend(0.5, 0.65, 1.1, 0.82)); SetupLegend(leg);
   leg -> SetNColumns(2);
   leg->AddEntry(hIn[0], "#Lambda", "L")->SetTextSizePixels(24);
-  leg->AddEntry(hIn[0], "Inclusive", "LP")->SetTextSizePixels(24);
+  leg->AddEntry(hIn[0], "Inclusive", "P")->SetTextSizePixels(24);
 
   leg->AddEntry(hIn[1], "#bar{#Lambda}", "L")->SetTextSizePixels(24);
-  leg->AddEntry(hJE[0], "#it{R}(Par, jet) < 0.4", "LP")->SetTextSizePixels(24);
+  leg->AddEntry(hJE[0], "#it{R}(par, jet) < 0.4", "P")->SetTextSizePixels(24);
 
   leg->Draw();
 
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(24);
-  tex->DrawLatex(0.16, 0.92, "ALICE pp #sqrt{#it{s}} = 13 TeV, |#eta| < 0.75");
+  tex->DrawLatex(0.16, 0.9, "ALICE pp #sqrt{#it{s}} = 13 TeV, |#eta| < 0.75");
   
   can->SaveAs(Form("./figure/eps/%s.eps", can->GetName()));
   can->SaveAs(Form("./figure/pdf/%s.pdf", can->GetName()));
