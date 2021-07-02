@@ -15,9 +15,9 @@ void f05_4(){
   auto dflx(0.), dfux(12.);
   auto dfly(2e-6), dfuy(6e-3);
   
-  auto dlsx(0.05), dlsy(0.05);
-  auto dtsx(0.05), dtsy(0.05);
-  auto dtox(1.30), dtoy(1.10);
+  auto dlsx(0.06), dlsy(0.06);
+  auto dtsx(0.06), dtsy(0.06);
+  auto dtox(1.20), dtoy(1.05);
   
   TString stnx("#it{p}_{T} (GeV/#it{c})");
   TString stny("d#it{#rho}/d#it{p}_{T} (GeV/#it{c} rad)^{-1}");
@@ -48,10 +48,10 @@ void f05_4(){
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(24);
-  tex->DrawLatex(0.16, 0.9, "p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV, 0-100%");
-  tex->DrawLatex(0.55, 0.3, "#Omega^{-} + #bar{#Omega}^{+}, |#eta_{#Omega}| < 0.75");
+  tex->DrawLatex(0.16, 0.9, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV");
+  tex->DrawLatex(0.75, 0.4, "0-100%");
+  tex->DrawLatex(0.65, 0.3, "#Omega^{-} + #bar{#Omega}^{+}, |#eta_{#Omega}| < 0.75");
   tex->DrawLatex(0.25, 0.2, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
-  tex->DrawLatex(0.82, 0.9, "ALICE");
   
   can->SaveAs(Form("./figure/eps/%s.eps", can->GetName()));
   can->SaveAs(Form("./figure/pdf/%s.pdf", can->GetName()));

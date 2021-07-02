@@ -13,11 +13,11 @@ void f05_2(){
 
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(3e-7), dfuy(3.);
+  auto dfly(9e-7), dfuy(1.1);
   
-  auto dlsx(0.05), dlsy(0.05);
-  auto dtsx(0.05), dtsy(0.05);
-  auto dtox(1.30), dtoy(1.10);
+  auto dlsx(0.06), dlsy(0.06);
+  auto dtsx(0.06), dtsy(0.06);
+  auto dtox(1.20), dtoy(1.05);
   
   TString stnx("#it{p}_{T} (GeV/#it{c})");
   TString stny("d#it{#rho}/d#it{p}_{T} (GeV/#it{c} rad)^{-1}");
@@ -37,7 +37,7 @@ void f05_2(){
   DrawHisto(h[2], wcl[2], wmk[1], "same"); DrawGraph(gE[2], wcl[2], "E2");
   DrawHisto(h[3], wcl[1], wmk[3], "same"); DrawGraph(gE[3], wcl[1], "E2");
 
-  auto leg(new TLegend(0.63, 0.63, 0.98, 0.88)); SetupLegend(leg);
+  auto leg(new TLegend(0.64, 0.67, 0.98, 0.95)); SetupLegend(leg);
   leg->AddEntry(h[0], "Inclusive", "P")->SetTextSizePixels(24);
   leg->AddEntry(h[2], "Perp. cone", "P")->SetTextSizePixels(24);
   leg->AddEntry(h[1], "#it{R}(#Lambda, jet) < 0.4", "P")->SetTextSizePixels(24);
@@ -49,10 +49,10 @@ void f05_2(){
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(24);
-  tex->DrawLatex(0.16, 0.9, "p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV, 0-100%");
-  tex->DrawLatex(0.16, 0.3, "#Lambda + #bar{#Lambda}, |#eta_{#Lambda}| < 0.75");
-  tex->DrawLatex(0.16, 0.2, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
-  tex->DrawLatex(0.82, 0.9, "ALICE");
+  tex->DrawLatex(0.16, 0.9, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV");
+  tex->DrawLatex(0.17, 0.4, "0-100%");
+  tex->DrawLatex(0.17, 0.3, "#Lambda + #bar{#Lambda}, |#eta_{#Lambda}| < 0.75");
+  tex->DrawLatex(0.17, 0.2, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
   
   can->SaveAs(Form("./figure/eps/%s.eps", can->GetName()));
   can->SaveAs(Form("./figure/pdf/%s.pdf", can->GetName()));
