@@ -26,6 +26,7 @@ root -l -b -q f06_3.C
 root -l -b -q f06_4_twoPad.C
 root -l -b -q f06_5_twoPad.C
 root -l -b -q f06_6_twoPad.C
+root -l -b -q f06_7.C
 
 root -l -b -q f07_1.C
 root -l -b -q f07_2.C
@@ -53,4 +54,4 @@ root -l -b -q f10_2.C
 root -l -b -q f10_3.C
 root -l -b -q f10_4.C
 
-cp ./figure/pdf/* /home/cuipengyao/Desktop/Writting/paper/update/figures/results 
+cp ./figure/pdf/* /home/cuipengyao/Desktop/Writting/paper/figures/results 

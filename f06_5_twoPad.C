@@ -1,14 +1,14 @@
 #include "inc/PyJetUtils.h"
 
-void f06_4_twoPad(){
+void f06_5_twoPad(){
 //=============================================================================
 
   auto f = TFile::Open("./data/pPb.root", "read");
   TList* l[4];
-  l[0]= (TList*)f->Get("Kshort_0100");
-  l[1]= (TList*)f->Get("Kshort_010");
-  l[2]= (TList*)f->Get("Kshort_1040");
-  l[3]= (TList*)f->Get("Kshort_40100");
+  l[0]= (TList*)f->Get("Lambda_sum_0100");
+  l[1]= (TList*)f->Get("Lambda_sum_010");
+  l[2]= (TList*)f->Get("Lambda_sum_1040");
+  l[3]= (TList*)f->Get("Lambda_sum_40100");
   f->Close();
   TH1D *h[4]; TH1D *hE[4]; TGraph *gE[4]; TH1D* hR[3]; TH1D* heR[3]; TGraph* geR[3];
   for(Int_t i = 0; i<4; i++){
@@ -38,12 +38,12 @@ void f06_4_twoPad(){
                                     //               used to fit p-Pb acceptance
 
   for (auto i=0; i<nm; ++i){
-    g[i] = new TGraph(Spectrum(i, sd, "Kshort", sj, "JC04", "PC04"));
+    g[i] = new TGraph(Spectrum(i, sd, "Lambda", sj, "JC04", "PC04"));
   }
 
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(5e-4), dfuy(3e-1);
+  auto dfly(4e-4), dfuy(8e-2);
   
   auto dlsx(0.05), dlsy(0.06);
   auto dtsx(0.05), dtsy(0.06);
@@ -55,7 +55,7 @@ void f06_4_twoPad(){
   SetStyle(kTRUE);
   gStyle->SetErrorX(0);
   
-  auto can(MakeCanvas("f06_4", 700, 600));
+  auto can(MakeCanvas("f06_5", 700, 600));
   auto padT = MakePadT("padT"); can->cd();
   auto padB = MakePadB("padB"); can->cd();
   padT->cd();
@@ -89,8 +89,8 @@ void f06_4_twoPad(){
   tex->SetNDC();
   tex->SetTextSizePixels(24);
   tex->DrawLatex(0.16, 0.9, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV");
-  tex->DrawLatex(0.16, 0.27, "K^{0}_{S} in jets, UE subtracted");
-  tex->DrawLatex(0.16, 0.17, "#it{R}(K^{0}_{S}, jet) < 0.4, |#eta_{K^{0}_{S}}| < 0.75");
+  tex->DrawLatex(0.16, 0.27, "#Lambda + #bar{#Lambda} in jets, UE subtracted");
+  tex->DrawLatex(0.16, 0.17, "#it{R}(#Lambda, jet) < 0.4, |#eta_{#Lambda}| < 0.75");
   tex->DrawLatex(0.16, 0.07, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
   can->cd();
   padB->cd();
