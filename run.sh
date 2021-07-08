@@ -23,9 +23,9 @@ root -l -b -q f05_4.C
 root -l -b -q f06_1.C
 root -l -b -q f06_2.C
 root -l -b -q f06_3.C
-root -l -b -q f06_4.C
-root -l -b -q f06_5.C
-root -l -b -q f06_6.C
+root -l -b -q f06_4_twoPad.C
+root -l -b -q f06_5_twoPad.C
+root -l -b -q f06_6_twoPad.C
 
 root -l -b -q f07_1.C
 root -l -b -q f07_2.C
