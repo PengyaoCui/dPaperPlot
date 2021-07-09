@@ -13,12 +13,12 @@ void f08_1(){
 
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(0.), dfuy(1.2);
-  
-  auto dlsx(0.05), dlsy(0.05);
-  auto dtsx(0.05), dtsy(0.05);
-  auto dtox(1.30), dtoy(1.10);
-  
+  auto dfly(0.05), dfuy(1.);
+
+  auto dlsx(0.06), dlsy(0.06);
+  auto dtsx(0.06), dtsy(0.06);
+  auto dtox(1.20), dtoy(1.05);
+
   TString stnx("#it{p}_{T} (GeV/#it{c})");
   TString stny("(#Lambda + #bar{#Lambda}) / 2K_{S}^{0}");
  
@@ -29,7 +29,7 @@ void f08_1(){
   auto hfm(can->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm, stnx, stny, dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm->GetXaxis()->SetNdivisions(510);
-  hfm->GetYaxis()->SetNdivisions(510);
+  hfm->GetYaxis()->SetNdivisions(505);
 
   DrawHisto(h[0], wcl[0], wmk[0], "same"); DrawGraph(gE[0], wcl[0], "E2");
   DrawHisto(h[1], wcl[3], wmk[2], "same"); DrawGraph(gE[1], wcl[3], "E2");
@@ -46,8 +46,7 @@ void f08_1(){
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(24);
-  tex->DrawLatex(0.16, 0.9, "p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV, 0-100%");
-  tex->DrawLatex(0.82, 0.9, "ALICE");
+  tex->DrawLatex(0.16, 0.9, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV, 0-100%");
   tex->DrawLatex(0.16, 0.8, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
   tex->DrawLatex(0.16, 0.7, "|#eta_{particle}| < 0.75");
   

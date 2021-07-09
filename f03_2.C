@@ -21,10 +21,12 @@ void f03_2(){
   auto dflx(0.), dfux(12.);
   auto dfly(0.), dfuy(0.32);
   
-  auto dlsx(0.05), dlsy(0.05);
+ 
+  auto dlsx(0.06), dlsy(0.06);
   auto dtsx(0.06), dtsy(0.06);
-  auto dtox(1.10), dtoy(1.00);
-  
+  auto dtox(1.20), dtoy(1.05);
+
+ 
   TString stnx("#it{p}_{T} (GeV/#it{c})");
   TString stny("Feed-dow fraction");
   

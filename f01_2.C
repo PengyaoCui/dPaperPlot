@@ -31,10 +31,11 @@ void f01_2(){
 //=============================================================================
   auto dflx(1.09), dfux(1.141);
   auto dfly(2e3), dfuy(3e6);
-  
-  auto dlsx(0.05), dlsy(0.05);
+
+  auto dlsx(0.06), dlsy(0.06);
   auto dtsx(0.06), dtsy(0.06);
-  auto dtox(1.20), dtoy(1.0);
+  auto dtox(1.20), dtoy(1.05);
+
   
   TString stnx("#it{M}_{p#pi} (GeV/#it{c}^{2})");
   TString stny("Count");

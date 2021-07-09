@@ -19,14 +19,23 @@ void f09_1(){
     h[i] = (TH1D*)l[i]->FindObject(Form("hJER"));
     gE[i] = (TGraphErrors*)l[i]->FindObject(Form("JERerr"));
   }
+  const TString sj("Jet10");
+  const TString sd("pp13d00TeV");  // pp13d00TeV:   pp at 13   TeV
+                                    // pp05d02TeVrs: pp at 5.02 TeV
+                                    //               with rapidity shift
+                                    //               used to fit p-Pb acceptance
+
+  TGraph *g[nm];
+  for (auto i=0; i<nm; ++i) g[i] = new TGraph(RatioLK(i, sd, sj, "JC04", "PC04"));
+
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(0.), dfuy(1.2);
-  
-  auto dlsx(0.05), dlsy(0.05);
-  auto dtsx(0.05), dtsy(0.05);
-  auto dtox(1.30), dtoy(1.10);
-  
+  auto dfly(0.), dfuy(1.);
+
+  auto dlsx(0.06), dlsy(0.06);
+  auto dtsx(0.06), dtsy(0.06);
+  auto dtox(1.20), dtoy(1.05);
+
   TString stnx("#it{p}_{T} (GeV/#it{c})");
   TString stny("(#Lambda + #bar{#Lambda}) / 2K_{S}^{0}");
  
@@ -44,20 +53,24 @@ void f09_1(){
   DrawHisto(h[2], wcl[2], wmk[2], "same"); DrawGraph(gE[2], wcl[2], "E2");
   DrawHisto(h[3], wcl[3], wmk[3], "same"); DrawGraph(gE[3], wcl[3], "E2");
   DrawHisto(h[4], wcl[4], wmk[4], "same"); DrawGraph(gE[4], wcl[4], "E2");
+  g[1]->SetLineStyle(9);
+  DrawGraph(g[1],  wcl[8], "C");
   
-  auto leg(new TLegend(0.75, 0.50, 1., 0.75)); SetupLegend(leg);
+  auto leg(new TLegend(0.72, 0.5, 1., 0.75)); SetupLegend(leg);
   leg->AddEntry(h[0], "0-100%", "P")->SetTextSizePixels(24);
   leg->AddEntry(h[1], "0-10%", "P")->SetTextSizePixels(24);
   leg->AddEntry(h[2], "10-40%", "P")->SetTextSizePixels(24);
   leg->AddEntry(h[3], "40-100%", "P")->SetTextSizePixels(24);
   leg->AddEntry(h[4], "pp", "P")->SetTextSizePixels(24);
   leg->Draw();
+  auto Leg(new TLegend(0.72, 0.2, 1., 0.3)); SetupLegend(Leg);
+  Leg->AddEntry(g[1], "PYTHIA 8", "L")->SetTextSizePixels(24);
+  Leg->Draw();
 
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(24);
-  tex->DrawLatex(0.16, 0.9, "p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV and pp #sqrt{#it{s}} = 13 TeV");
-  tex->DrawLatex(0.82, 0.9, "ALICE");
+  tex->DrawLatex(0.16, 0.9, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV and pp #sqrt{#it{s}} = 13 TeV");
   tex->DrawLatex(0.16, 0.8, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
   tex->DrawLatex(0.16, 0.7, "#it{R}(particle, jet) < 0.4, |#eta_{particle}| < 0.75");
   tex->DrawLatex(0.16, 0.6, "Particles in jets, UE subtracted");

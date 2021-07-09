@@ -10,7 +10,7 @@
 #include <TGraphAsymmErrors.h>
 #endif
 
-const Color_t wcl[] = { kBlack,  kRed+1,  kBlue+1, kGreen+3, kMagenta+1, kOrange-1, kCyan+2, kYellow+2 };
+const Color_t wcl[] = { kBlack,  kRed+1,  kBlue+1, kGreen+3, kMagenta+1, kOrange-1, kCyan+2, kYellow+2 , kGray+1};
 const Color_t wcf[] = { kGray+1, kRed-10, kBlue-9, kGreen-8, kMagenta-9, kOrange-9, kCyan-8, kYellow-7 };
 const Style_t wmk[] = { kFullCircle, kOpenCircle, kFullSquare, kFullTriangleDown, kOpenTriangleDown, kOpenSquare, kOpenDiamond,
                         kOpenCross,  kFullCross, kFullDiamond, kFullStar,   kOpenStar };

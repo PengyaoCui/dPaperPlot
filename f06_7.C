@@ -23,11 +23,13 @@ void f06_7(){
 
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(9e-6), dfuy(8e-2);
-  
-  auto dlsx(0.05), dlsy(0.05);
-  auto dtsx(0.05), dtsy(0.05);
-  auto dtox(1.30), dtoy(1.10);
+  auto dfly(6e-6), dfuy(6e-2);
+ 
+
+  auto dlsx(0.06), dlsy(0.06);
+  auto dtsx(0.06), dtsy(0.06);
+  auto dtox(1.20), dtoy(1.05);
+
   
   TString stnx("#it{p}_{T} (GeV/#it{c})");
   TString stny("d#it{#rho}/d#it{p}_{T} (GeV/#it{c} rad)^{-1}");
@@ -44,9 +46,9 @@ void f06_7(){
 
   DrawHisto(h, wcl[0], wmk[0], "same"); DrawGraph(gE, wcl[0], "E2");
 
-  g[0]->SetLineStyle(7);
+  g[1]->SetLineStyle(9);
 
-  DrawGraph(g[1],  wcl[0], "C");
+  DrawGraph(g[1],  wcl[8], "C");
   //DrawGraph(g[0],  wcl[1], "C");
   //DrawGraph(g[2],  wcl[2], "C");
   //DrawGraph(g[3],  wcl[3], "C");
@@ -60,9 +62,10 @@ void f06_7(){
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(24);
-  tex->DrawLatex(0.16, 0.92, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV");
-  tex->DrawLatex(0.16, 0.82, Form("#Omega^{-} + #bar{#Omega}^{+} in jet"));
-  //tex->DrawLatex(0.16, 0.72, "PYTHIA 8 BLC mode 0");
+  tex->DrawLatex(0.16, 0.9, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV");
+  tex->DrawLatex(0.16, 0.8, Form("#Omega^{-} + #bar{#Omega}^{+} in jet, UE subtracted"));
+  tex->DrawLatex(0.16, 0.3, "#it{R}(#Omega, jet) < 0.4, |#eta_{#Omega}| < 0.75");
+  tex->DrawLatex(0.16, 0.2, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
 
   can->SaveAs(Form("./figure/eps/%s.eps", can->GetName()));
   can->SaveAs(Form("./figure/pdf/%s.pdf", can->GetName()));

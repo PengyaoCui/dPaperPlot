@@ -13,11 +13,12 @@ void f07_4(){
 
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(0.), dfuy(0.55);
-  
-  auto dlsx(0.05), dlsy(0.05);
-  auto dtsx(0.05), dtsy(0.05);
-  auto dtox(1.30), dtoy(1.10);
+  auto dfly(0.02), dfuy(0.48);
+
+  auto dlsx(0.06), dlsy(0.06);
+  auto dtsx(0.06), dtsy(0.06);
+  auto dtox(1.20), dtoy(1.05);
+
   
   TString stnx("#it{p}_{T} (GeV/#it{c})");
   TString stny("(#Xi^{-} + #bar{#Xi}^{+}) / (#Lambda + #bar{#Lambda})");
@@ -46,8 +47,7 @@ void f07_4(){
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(24);
-  tex->DrawLatex(0.16, 0.9, "pp #sqrt{#it{s}} = 13 TeV");
-  tex->DrawLatex(0.82, 0.9, "ALICE");
+  tex->DrawLatex(0.16, 0.9, "ALICE pp #sqrt{#it{s}} = 13 TeV");
   tex->DrawLatex(0.16, 0.8, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
   tex->DrawLatex(0.16, 0.7, "|#eta_{particle}| < 0.75");
   

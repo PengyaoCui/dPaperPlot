@@ -70,9 +70,9 @@ void f06_5_twoPad(){
   DrawHisto(h[2], wcl[2], wmk[2], "same"); DrawGraph(gE[2], wcl[2], "E2");
   DrawHisto(h[3], wcl[3], wmk[3], "same"); DrawGraph(gE[3], wcl[3], "E2");
 
-  g[0]->SetLineStyle(7);
+  g[1]->SetLineStyle(9);
 
-  DrawGraph(g[1],  wcl[0], "C");
+  DrawGraph(g[1],  wcl[8], "C");
   //DrawGraph(g[0],  wcl[1], "C");
   //DrawGraph(g[2],  wcl[2], "C");
   //DrawGraph(g[3],  wcl[3], "C");

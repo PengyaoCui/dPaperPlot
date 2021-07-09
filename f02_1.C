@@ -20,7 +20,7 @@ void f02_1(){
   } 
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(0.0001), dfuy(0.65);
+  auto dfly(0.0001), dfuy(0.58);
   
   auto dlsx(0.07), dlsy(0.07);
   auto dtsx(0.08), dtsy(0.08);
@@ -31,21 +31,21 @@ void f02_1(){
   
   SetStyle(kTRUE);
   
-  auto can(MakeCanvas("f02_1"));
+  auto can(MakeCanvas("f02_1", 700, 600));
   auto padT = MakePadT("padT"); can->cd();
   auto padB = MakePadB("padB"); can->cd();
   padT->cd(); 
   auto hfm(padT->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm, stnx, stny, dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm->GetXaxis()->SetNdivisions(510);
-  hfm->GetYaxis()->SetNdivisions(510);
+  hfm->GetYaxis()->SetNdivisions(505);
   
   for(Int_t i =0; i<n; i++){
     DrawHisto(hIn[i], wcl[i], wmk[0], "same");
     DrawHisto(hJE[i], wcl[i], wmk[1], "same");
   }
 
-  auto leg(new TLegend(0.83, 0.40, 1.1, 0.85)); SetupLegend(leg);
+  auto leg(new TLegend(0.83, 0.45, 1.1, 0.9)); SetupLegend(leg);
   auto Leg(new TLegend(0.55, 0.50, 0.8, 0.75)); SetupLegend(leg);
   //leg -> SetNColumns(3);
   for(Int_t i =0; i<n; i++){
@@ -75,7 +75,7 @@ void f02_1(){
   auto hfmb(padB->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfmb, stnx, stny, dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfmb->GetXaxis()->SetNdivisions(510);
-  hfmb->GetYaxis()->SetNdivisions(505);
+  hfmb->GetYaxis()->SetNdivisions(503);
   hfmb->GetXaxis()->SetTickLength(0.07);
   
   for(Int_t i =0; i<n; i++){

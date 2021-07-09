@@ -31,10 +31,11 @@ void f01_4(){
 //=============================================================================
   auto dflx(1.65), dfux(1.7);
   auto dfly(3e2), dfuy(5e3);
-  
-  auto dlsx(0.05), dlsy(0.05);
+
+  auto dlsx(0.06), dlsy(0.06);
   auto dtsx(0.06), dtsy(0.06);
-  auto dtox(1.20), dtoy(1.0);
+  auto dtox(1.20), dtoy(1.05);
+
   
   TString stnx("#it{M}_{#LambdaK} (GeV/#it{c}^{2})");
   TString stny("Count");
@@ -45,7 +46,7 @@ void f01_4(){
   can->SetLogy();
   auto hfm(can->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm, stnx, stny, dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
-  hfm->GetXaxis()->SetNdivisions(510);
+  hfm->GetXaxis()->SetNdivisions(505);
   hfm->GetYaxis()->SetNdivisions(510);
 
   hR->Draw("histsame");
