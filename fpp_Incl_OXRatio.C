@@ -1,6 +1,6 @@
 #include "inc/PyJetUtils.h"
 
-void fpp_JE_OXRatio(){
+void fpp_Incl_OXRatio(){
 //=============================================================================
 
   TList* l; TFile *f;
@@ -8,9 +8,9 @@ void fpp_JE_OXRatio(){
   l = (TList*)f->Get(Form("Omega_toXRatio"));
   f->Close();
 
-  auto h = (TH1D*)l->FindObject(Form("hJER")); 
-  auto gE = (TGraphErrors*)l->FindObject(Form("JERerr"));
-  auto hE = (TH1D*)l->FindObject(Form("heJER"));
+  auto h = (TH1D*)l->FindObject(Form("hInR")); 
+  auto gE = (TGraphErrors*)l->FindObject(Form("InRerr"));
+  auto hE = (TH1D*)l->FindObject(Form("heInR"));
 
   const TString sj("Jet10");
   const TString sd("pp13d00TeV");  // pp13d00TeV:   pp at 13   TeV
@@ -21,7 +21,7 @@ void fpp_JE_OXRatio(){
   TGraph *g[nm]; TH1D *hm[nm];
   TGraph *gR[nm]; TH1D *hmR[nm];  
   for (auto i=0; i<nm; ++i){ 
-    hm[i] = (TH1D*)(RatioOX(i, sd, sj, "JC04", "PC04"));
+    hm[i] = (TH1D*)(RatioOX(i, sd, sj));
     g[i] = new TGraph(hm[i]);
     hmR[i] = (TH1D*)hm[i]->Clone(Form("hR_%d", i));
     DeNormBinningHistogram(hmR[i]);
@@ -39,6 +39,7 @@ void fpp_JE_OXRatio(){
   for(auto i = 1; i<= h->GetNbinsX(); i++){
     hR->SetBinContent(i, 1.); 
     hR->SetBinError(i, h->GetBinError(i)/h->GetBinContent(i)); 
+    //hRE->SetBinContent(i, hE->GetBinContent(i)/h->GetBinContent(i)); 
     hRE->SetBinContent(i, hE->GetBinContent(i)); 
   }
   gRE = ConvHistogramToGraphErrors(hR, hRE, h->GetNbinsX());
@@ -46,14 +47,14 @@ void fpp_JE_OXRatio(){
 
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(0.0), dfuy(0.55);
+  auto dfly(0.0), dfuy(0.31);
 
   auto dlsx(0.05), dlsy(0.06);
   auto dtsx(0.05), dtsy(0.06);
   auto dtox(1.30), dtoy(0.9);
 
   TString stnx("#it{p}_{T} (GeV/#it{c})");
-  TString stny("(#Omega^{-} + #bar{#Omega}^{+}) / (#Xi^{-} + #bar{#Xi}^{+})");
+  TString stny("(#Omega^{-} + #bar{#Omega}^{+}) / (#Xi + #bar{#Xi})");
 
   SetStyle(kTRUE);
   gStyle->SetErrorX(0);
@@ -61,7 +62,7 @@ void fpp_JE_OXRatio(){
 //=============================================================================
   
   
-  auto can(MakeCanvas("pp_JE_OXRatio", 700, 600));
+  auto can(MakeCanvas("pp_Incl_OXRatio", 700, 600));
   auto padT = MakePadT("padT"); can->cd();
   auto padB = MakePadB("padB"); can->cd();
   padT->cd();
@@ -78,7 +79,7 @@ void fpp_JE_OXRatio(){
   DrawGraph(g[2],  wcl[2], "C");
   DrawGraph(g[3],  wcl[3], "C");
 
-  auto leg(new TLegend(0.68, 0.46, 1., 0.71)); SetupLegend(leg);
+  auto leg(new TLegend(0.68, 0.56, 0.95, 0.85)); SetupLegend(leg);
   //leg->AddEntry(g[1], "Monash", "L")->SetTextSizePixels(24);
   leg->AddEntry(h, "Data", "P")->SetTextSizePixels(24);
   leg->AddEntry(g[0], "BLC mode 0", "L")->SetTextSizePixels(24);
@@ -90,13 +91,11 @@ void fpp_JE_OXRatio(){
   tex->SetNDC();
   tex->SetTextSizePixels(24);
   tex->DrawLatex(0.16, 0.9, "ALICE pp #sqrt{#it{s}} = 13 TeV");
-  tex->DrawLatex(0.16, 0.8, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
-  tex->DrawLatex(0.16, 0.7, "#it{R}(particle, jet) < 0.4, |#eta_{particle}| < 0.75");
-  tex->DrawLatex(0.16, 0.6, "Particles in jets, UE subtracted");
+  tex->DrawLatex(0.16, 0.8, "|#eta_{particle}| < 0.75");
 
   can->cd();
   padB->cd();
-  dfly = 0.0, dfuy = 1.7;
+  dfly = 0.01, dfuy = 1.5;
 
   dlsx = 0.11; dlsy = 0.11;
   dtsx = 0.11; dtsy = 0.11;

@@ -24,7 +24,9 @@ void fpp_JE_OLRatio(){
     hm[i] = (TH1D*)(RatioOL(i, sd, sj, "JC04", "PC04"));
     g[i] = new TGraph(hm[i]);
     hmR[i] = (TH1D*)hm[i]->Clone(Form("hR_%d", i));
+    DeNormBinningHistogram(hmR[i]);
     hmR[i] = MakeRebinTH1D(hmR[i], h);
+    NormBinningHistogram(hmR[i]);
     hmR[i]->Divide(h);
     gR[i] = new TGraph(hmR[i]);
   }
