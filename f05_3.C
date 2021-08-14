@@ -49,7 +49,7 @@ void f05_3(){
   tex->SetNDC();
   tex->SetTextSizePixels(24);
   tex->DrawLatex(0.16, 0.9, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV");
-  tex->DrawLatex(0.17, 0.4, "0-100%");
+  //tex->DrawLatex(0.17, 0.4, "0-100%");
   tex->DrawLatex(0.17, 0.3, "#Xi^{-} + #bar{#Xi}^{+}, |#eta_{#Xi}| < 0.75");
   tex->DrawLatex(0.17, 0.2, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
   
