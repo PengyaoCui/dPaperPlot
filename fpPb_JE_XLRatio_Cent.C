@@ -43,7 +43,7 @@ void fpPb_JE_XLRatio_Cent(){
   SetStyle(kTRUE);
   gStyle->SetErrorX(0);
 
-  auto can(MakeCanvas("fpPb_JE_XLRatio_Cent"));
+  auto can(MakeCanvas("pPb_JE_XLRatio_Cent"));
   auto hfm(can->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm, stnx, stny, dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm->GetXaxis()->SetNdivisions(510);

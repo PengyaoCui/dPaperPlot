@@ -56,7 +56,7 @@ void fpPb_Incl_Xi_Cent(){
   SetStyle(kTRUE);
   gStyle->SetErrorX(0);
   
-  auto can(MakeCanvas("fpPb_Incl_Xi_Cent", 700, 600));
+  auto can(MakeCanvas("pPb_Incl_Xi_Cent", 700, 600));
   auto padT = MakePadT("padT"); can->cd();
   auto padB = MakePadB("padB"); can->cd();
   padT->cd();

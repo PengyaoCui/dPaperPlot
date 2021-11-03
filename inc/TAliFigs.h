@@ -27,6 +27,19 @@ void DrawAliLogo(const Double_t dX, const Double_t dY, const Bool_t b=kTRUE, con
   return;
 }
 
+void DrawGraphError(TGraphErrors* const g, const Color_t wc, const Style_t ws, const Option_t *opt)
+{
+  g->SetLineWidth(2);
+  g->SetLineColor(wc);
+  g->SetMarkerStyle(ws);
+  g->SetMarkerColor(wc);
+  g->SetFillStyle(3002);
+  g->SetFillColor(g->GetLineColor());
+  g->Draw(opt);
+
+  return;
+}
+
 //_____________________________________________________________________________
 void DrawGraph(TGraph* const g, const Color_t wc, const Option_t *opt)
 {

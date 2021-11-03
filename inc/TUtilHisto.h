@@ -91,6 +91,22 @@ void CalcRelDeviation(TH1D* const hi, TH1D* const hr)
 
   return;
 }
+//_____________________________________________________________________________
+TH1D* MinHistograms(const Int_t n, TH1D **h)
+{
+  if ((n<=0) || (!h[0])) return 0x0;
+  //=============================================================================
+
+  Double_t *d = new Double_t[n];
+  TH1D *hMin = (TH1D*)h[0]->Clone("hMin");
+  for (Int_t k=1; k<=hMin->GetNbinsX(); k++) {
+    for (Int_t j=0; j<n; j++) d[j] = h[j]->GetBinContent(k);
+    hMin->SetBinContent(k, TMath::MinElement(n,d));
+    hMin->SetBinError(k, TMath::RMS(n,d));
+  }
+
+  return hMin;
+}
 
 //_____________________________________________________________________________
 TH1D *MaxHistograms(const Int_t n, TH1D **h)
@@ -264,3 +280,30 @@ TGraphErrors *ConvHistogramToGraphErrors(TH1D* const hVar, const Double_t dd=0.0
 
   return (new TGraphErrors(n,dvx,dvy,dex,dey));
 }
+
+TGraphErrors *ScaleGraphErrors(TGraphErrors* const g, const double t, const int n)
+{
+  
+  Double_t* dvx = g->GetX(); Double_t* dex = g->GetEX();
+  Double_t* dvy = g->GetY(); Double_t* dey = g->GetEY();
+ 
+  for(int i = 0; i< n; i++){
+    dvy[i] = dvy[i]*t; dey[i] = dey[i]*t;
+  } 
+  return (new TGraphErrors(n, dvx, dvy, dex, dey));
+}
+
+
+TGraph *ScaleGraph(TGraphErrors* const g, const double t, const int n)
+{
+
+  Double_t* dvx = g->GetX();
+  Double_t* dvy = g->GetY();
+
+  for(int i = 0; i< n; i++){
+    dvy[i] = dvy[i]*t;
+  }
+  return (new TGraph(n, dvx, dvy));
+}
+
+

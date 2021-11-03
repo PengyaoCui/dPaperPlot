@@ -49,9 +49,9 @@ void CanvasEnd(TCanvas* const c)
   return;
 }
 
-TPad* MakePadT(TString sName)
+TPad* MakePadT(TString sName, const Double_t y = 0.35)
 {
-  TPad *p = new TPad(Form("c%s_U",sName.Data()), Form("%s_U",sName.Data()), 0., 0.35, 1., 1.);
+  TPad *p = new TPad(Form("c%s_U",sName.Data()), Form("%s_U",sName.Data()), 0., y, 1., 1.);
   p->Range(0., 0., 1., 1.);
   p->SetFillColor(0);
   p->SetBorderMode(0);
@@ -69,9 +69,9 @@ TPad* MakePadT(TString sName)
 }
 
 //_____________________________________________________________________________
-TPad* MakePadB(TString sName)
+TPad* MakePadB(TString sName, const Double_t y = 0.35)
 {
-  TPad *p = new TPad(Form("c%s_D",sName.Data()), Form("%s_D",sName.Data()), 0., 0. , 1., 0.35);
+  TPad *p = new TPad(Form("c%s_D",sName.Data()), Form("%s_D",sName.Data()), 0., 0., 1., y);
   p->Range(0., 0., 1., 1.);
   p->SetFillColor(0);
   p->SetBorderMode(0);
@@ -175,4 +175,25 @@ TPad* MakePadBR(TString sName)
 
   return p;
 }
+
+//_____________________________________________________________________________
+TPad* MakePad(TString sName, const Double_t x1, const Double_t y1, const Double_t x2, const Double_t y2)
+{
+  TPad *p = new TPad(Form("c%s_D",sName.Data()), Form("%s_D",sName.Data()), x1, y1, x2, y2);
+  p->Range(0., 0., 1., 1.);
+  p->SetFillColor(0);
+  p->SetBorderMode(0);
+  p->SetBorderSize(0);
+  p->SetRightMargin(0.03);
+  p->SetLeftMargin(0.12);
+  p->SetTopMargin(0.);
+  p->SetBottomMargin(0.);
+  p->SetFrameFillStyle(0);
+  p->SetFrameBorderMode(0);
+  p->Draw();
+  p->cd();
+
+  return p;
+}
+
 
