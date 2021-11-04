@@ -1,12 +1,17 @@
 #include "inc/PyJetUtils.h"
 
-void pp_InclSpect(){
+void pp_JESpect(){
 //=============================================================================
 
   TString sp[] = {"Kshort", "Lambda_sum", "Xi", "Omega"};
   const auto np = 4; 
 
-  const TString sd("pp13d00TeV"); 
+  const TString sj("Jet10");
+  const TString sd("pp13d00TeV");  // pp13d00TeV:   pp at 13   TeV
+                                    // pp05d02TeVrs: pp at 5.02 TeV
+                                    //               with rapidity shift
+                                    //               used to fit p-Pb acceptance
+
 
 
   TList* l[np]; TH1D* h[np]; TGraphErrors*gE[np]; TH1D*hE[np]; TGraph* g[np][nm]; TH1D* hPy[np][nm];
@@ -14,18 +19,18 @@ void pp_InclSpect(){
   f = TFile::Open("./data/pp.root", "read");
   for(int p = 0; p<np; p++ ){
     l[p] = (TList*)f->Get(sp[p]);
-    h[p]  = (TH1D*)l[p]->FindObject(Form("InclCen")); 
-    gE[p] = (TGraphErrors*)l[p]->FindObject(Form("Inclerr"));
-    hE[p] = (TH1D*)l[p]->FindObject(Form("InclErr"));
+    h[p]  = (TH1D*)l[p]->FindObject(Form("JECen")); 
+    gE[p] = (TGraphErrors*)l[p]->FindObject(Form("JEerr"));
+    hE[p] = (TH1D*)l[p]->FindObject(Form("JEErr"));
     int n = h[p]->GetNbinsX();
     if(p==0) {h[p]->Scale(16.); gE[p] = ScaleGraphErrors(gE[p], 16., n);}
     if(p==1) {h[p]->Scale(4.); gE[p] = ScaleGraphErrors(gE[p], 4., n);}
     if(p==2) {h[p]->Scale(2.); gE[p] = ScaleGraphErrors(gE[p], 2., n);}
     for (auto i=0; i<nm; ++i){
       if(p==1){
-        hPy[p][i] = (TH1D*)Spectrum(i, sd, "Lambda");
+        hPy[p][i] = (TH1D*)Spectrum(i, sd, "Lambda",sj, "JC04", "PC04");
       }else{
-        hPy[p][i] = (TH1D*)Spectrum(i, sd, sp[p]);
+        hPy[p][i] = (TH1D*)Spectrum(i, sd, sp[p], sj, "JC04", "PC04");
       }
       if(p==0) hPy[p][i]->Scale(16.);
       if(p==1) hPy[p][i]->Scale(4.);
@@ -72,7 +77,7 @@ void pp_InclSpect(){
 
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(2e-6), dfuy(2e0);
+  auto dfly(5e-5), dfuy(4e0);
 
   auto dlsx(0.045), dlsy(0.045);
   auto dtsx(0.045), dtsy(0.045);
@@ -87,7 +92,7 @@ void pp_InclSpect(){
 //=============================================================================
   
   
-  auto can(MakeCanvas("pp_Incl_Spect", 600, 900));
+  auto can(MakeCanvas("pp_JE_Spect", 600, 900));
  
   
   
@@ -118,27 +123,35 @@ void pp_InclSpect(){
   }
 
 
-  auto leg(new TLegend(0.4, 0.63, 0.95, 0.87)); SetupLegend(leg);
-  leg->SetNColumns(2);
-  leg->AddEntry(h[0], "#color[1]{K^{0}_{S} (#times 16)}", "P")->SetTextSizePixels(20);
-  leg->AddEntry(h[0], "PYTHIA 8", "")->SetTextSizePixels(20);
-  leg->AddEntry(h[1], "#color[633]{#Lambda + #bar{#Lambda} (#times 4)}", "P")->SetTextSizePixels(20);
+  auto leg(new TLegend(0.2, 0.9, 0.92, 0.95)); SetupLegend(leg);
+  leg->SetNColumns(3);
+  //leg->AddEntry(h[0], "PYTHIA 8", "")->SetTextSizePixels(20);
   leg->AddEntry(g[0][0], "BLC mode 0", "L")->SetTextSizePixels(20);
-  leg->AddEntry(h[2], "#color[601]{#Xi^{-} + #bar{#Xi}^{+} (#times 2)}", "P")->SetTextSizePixels(20);
   leg->AddEntry(g[0][2], "BLC mode 2", "L")->SetTextSizePixels(20);
-  leg->AddEntry(h[3], "#color[419]{#Omega^{-} + #bar{#Omega}^{+}}", "P")->SetTextSizePixels(20);
   leg->AddEntry(g[0][3], "BLC mode 3", "L")->SetTextSizePixels(20);
+  //leg->AddEntry(h[0], "#color[1]{K^{0}_{S} (#times 16)}", "P")->SetTextSizePixels(20);
+  //leg->AddEntry(h[1], "#color[633]{#Lambda + #bar{#Lambda} (#times 4)}", "P")->SetTextSizePixels(20);
+  //leg->AddEntry(h[2], "#color[601]{#Xi^{-} + #bar{#Xi}^{+} (#times 2)}", "P")->SetTextSizePixels(20);
+  //leg->AddEntry(h[3], "#color[419]{#Omega^{-} + #bar{#Omega}^{+}}", "P")->SetTextSizePixels(20);
   leg->Draw();
 
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(22);
-  tex->DrawLatex(0.36, 0.9, "ALICE pp #sqrt{#it{s}} = 13 TeV, |#eta| < 0.75");
+  tex->DrawLatex(0.56, 0.83, "ALICE pp #sqrt{#it{s}} = 13 TeV");
+  tex->DrawLatex(0.68, 0.75, Form("Particle in jets"));
+  
+  tex->DrawLatex(0.85, 0.62, "K^{0}_{S}");
+  tex->DrawLatex(0.75, 0.47, "#color[633]{#Lambda + #bar{#Lambda}}");
+  tex->DrawLatex(0.63, 0.25, "#color[601]{#Xi^{-} + #bar{#Xi}^{+}}");
+  tex->DrawLatex(0.58, 0.1, "#color[419]{#Omega^{-} + #bar{#Omega}^{+}}");
+  //tex->DrawLatex(0.16, 0.3, "#it{R}(par, jet) < 0.4, |#eta_{par}| < 0.75");
+  //tex->DrawLatex(0.16, 0.2, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
 
   can->cd();
   pad1->cd();
   
-  dfly = 0.3, dfuy = 0.9;
+  dfly = 0.5, dfuy = 2.5;
 
   dlsx = 0.29; dlsy = 0.29;
   dtsx = 0.29; dtsy = 0.29;
@@ -161,6 +174,7 @@ void pp_InclSpect(){
 
   can->cd();
   pad2->cd();
+  dfly = 0.5, dfuy = 2.9;
   auto hfm2(pad2->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm2, stnx, "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm2->GetXaxis()->SetNdivisions(510);
@@ -176,7 +190,7 @@ void pp_InclSpect(){
   
   can->cd();
   pad3->cd();
-  dfly = 0.1, dfuy = .7;
+  dfly = 2., dfuy = 6.5;
  
   auto hfm3(pad3->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm3, stnx, "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
@@ -193,7 +207,7 @@ void pp_InclSpect(){
   can->cd();
   pad4->cd();
   
-  dfly = 0.01, dfuy = .25;
+  dfly = 0.2, dfuy = 1.5;
  
   dlsx = 0.17; dlsy = 0.17;
   dtsx = 0.17; dtsy = 0.17;

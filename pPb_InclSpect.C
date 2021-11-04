@@ -1,19 +1,20 @@
 #include "inc/PyJetUtils.h"
 
-void pp_InclSpect(){
+void pPb_InclSpect(){
 //=============================================================================
 
   TString sp[] = {"Kshort", "Lambda_sum", "Xi", "Omega"};
   const auto np = 4; 
 
-  const TString sd("pp13d00TeV"); 
+
+  const TString sd("pp05d02TeVrs");  // pp13d00TeV:   pp at 13   TeV
 
 
   TList* l[np]; TH1D* h[np]; TGraphErrors*gE[np]; TH1D*hE[np]; TGraph* g[np][nm]; TH1D* hPy[np][nm];
   TFile *f;
-  f = TFile::Open("./data/pp.root", "read");
+  f = TFile::Open("./data/pPb.root", "read");
   for(int p = 0; p<np; p++ ){
-    l[p] = (TList*)f->Get(sp[p]);
+    l[p] = (TList*)f->Get(Form("%s_0100", sp[p].Data()));
     h[p]  = (TH1D*)l[p]->FindObject(Form("InclCen")); 
     gE[p] = (TGraphErrors*)l[p]->FindObject(Form("Inclerr"));
     hE[p] = (TH1D*)l[p]->FindObject(Form("InclErr"));
@@ -40,6 +41,7 @@ void pp_InclSpect(){
 //=============================================================================
   TH1D* hR[np][nm]; TH1D* hMax[np]; TH1D* hMin[np]; TH1D* hMid[np]; TH1D* hRm[nm];
   TH1D* hRE[np]; TGraph*gR[np][nm]; TGraphErrors*gRE[np];
+  TH1D* hPym[nm];TH1D* hPyMid[nm]; TH1D* hPyMin[nm]; TH1D* hPyMax[nm]; TGraphErrors*gPyE[np];
   for(int p = 0; p<np; p++ ){
     for (auto i=0; i<nm; ++i){
       hR[p][i] = (TH1D*)hPy[p][i]->Clone(Form("%s_%s", sp[np].Data(), sm[i].Data()));
@@ -48,8 +50,27 @@ void pp_InclSpect(){
       hR[p][i]->Divide(h[p]);
       NormBinningHistogram(hR[p][i]);
       hRm[i] = hR[p][i];
+      hPym[i] = hPy[p][i];
       //gR[p][i] = new TGraph(hR[p][i]); 
     }
+    hPyMax[p] = MaxHistograms(3, hPym);
+    hPyMin[p] = MinHistograms(3, hPym);
+    hPyMid[p] = (TH1D*)hPyMax[p]->Clone(Form("Pymid_%s", sp[np].Data()));
+    hPyMid[p]->Add(hPyMin[p]);
+    hPyMid[p]->Scale(0.5);
+    const int nBins = hPyMid[p]->GetNbinsX();
+    double X[nBins];
+    double Y[nBins];
+    double eX[nBins];
+    double eY[nBins];
+    for(int j = 1; j<= hPyMid[p]->GetNbinsX(); j++){
+      X[j-1] = hPyMid[p]->GetBinCenter(j); 
+      eX[j-1] = 0.; 
+      Y[j-1] = hPyMid[p]->GetBinContent(j); 
+      eY[j-1] = (hPyMax[p]->GetBinContent(j) - hPyMin[p]->GetBinContent(j))/2.;
+    }
+    gPyE[p] = new TGraphErrors(nBins, X, Y, eX, eY);
+
     hMax[p] = MaxHistograms(3, hRm);
     hMin[p] = MinHistograms(3, hRm);
     hMid[p] = (TH1D*)hMax[p]->Clone(Form("mid_%s", sp[np].Data()));
@@ -72,7 +93,7 @@ void pp_InclSpect(){
 
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(2e-6), dfuy(2e0);
+  auto dfly(2e-6), dfuy(4e0);
 
   auto dlsx(0.045), dlsy(0.045);
   auto dtsx(0.045), dtsy(0.045);
@@ -87,7 +108,7 @@ void pp_InclSpect(){
 //=============================================================================
   
   
-  auto can(MakeCanvas("pp_Incl_Spect", 600, 900));
+  auto can(MakeCanvas("pPb_Incl_Spect", 600, 900));
  
   
   
@@ -107,38 +128,40 @@ void pp_InclSpect(){
 
   for(int p = 0; p<np; p++ ){
     DrawHisto(h[p], wcl[p], wmk[p], "same"); 
-    DrawGraph(gE[p], wcl[p], "E2");
-    g[p][0]->SetLineStyle(0);
-    g[p][2]->SetLineStyle(2);
-    g[p][3]->SetLineStyle(5);
-    for (auto i=0; i<nm; ++i) {
-      if(i !=1 ) DrawGraph(g[p][i],  wcl[p], "C");
-    
-    }
+    //DrawGraph(gE[p], wcl[p], "E2");
+    //g[p][0]->SetLineStyle(0);
+    //g[p][2]->SetLineStyle(2);
+    //g[p][3]->SetLineStyle(5);
+    //for (auto i=0; i<nm; ++i) {
+    //  if(i !=1 ) DrawGraph(g[p][i],  wcl[p], "C");
+    //
+    //}
+    DrawGraphError(gPyE[p],  wcl[p], wcl[p], "E3 C");
   }
 
 
-  auto leg(new TLegend(0.4, 0.63, 0.95, 0.87)); SetupLegend(leg);
-  leg->SetNColumns(2);
+  auto leg(new TLegend(0.7, 0.53, 0.95, 0.87)); SetupLegend(leg);
+  //leg->SetNColumns(2);
   leg->AddEntry(h[0], "#color[1]{K^{0}_{S} (#times 16)}", "P")->SetTextSizePixels(20);
-  leg->AddEntry(h[0], "PYTHIA 8", "")->SetTextSizePixels(20);
   leg->AddEntry(h[1], "#color[633]{#Lambda + #bar{#Lambda} (#times 4)}", "P")->SetTextSizePixels(20);
-  leg->AddEntry(g[0][0], "BLC mode 0", "L")->SetTextSizePixels(20);
   leg->AddEntry(h[2], "#color[601]{#Xi^{-} + #bar{#Xi}^{+} (#times 2)}", "P")->SetTextSizePixels(20);
-  leg->AddEntry(g[0][2], "BLC mode 2", "L")->SetTextSizePixels(20);
   leg->AddEntry(h[3], "#color[419]{#Omega^{-} + #bar{#Omega}^{+}}", "P")->SetTextSizePixels(20);
-  leg->AddEntry(g[0][3], "BLC mode 3", "L")->SetTextSizePixels(20);
+  leg->AddEntry(gPyE[0], "BLC", "LF")->SetTextSizePixels(20);
+  //leg->AddEntry(h[0], "PYTHIA 8", "")->SetTextSizePixels(20);
+  //leg->AddEntry(g[0][0], "BLC mode 0", "L")->SetTextSizePixels(20);
+  //leg->AddEntry(g[0][2], "BLC mode 2", "L")->SetTextSizePixels(20);
+  //leg->AddEntry(g[0][3], "BLC mode 3", "L")->SetTextSizePixels(20);
   leg->Draw();
 
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(22);
-  tex->DrawLatex(0.36, 0.9, "ALICE pp #sqrt{#it{s}} = 13 TeV, |#eta| < 0.75");
+  tex->DrawLatex(0.32, 0.9, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV, |#eta| < 0.75");
 
   can->cd();
   pad1->cd();
   
-  dfly = 0.3, dfuy = 0.9;
+  dfly = 0.05, dfuy = 0.29;
 
   dlsx = 0.29; dlsy = 0.29;
   dtsx = 0.29; dtsy = 0.29;
@@ -161,6 +184,7 @@ void pp_InclSpect(){
 
   can->cd();
   pad2->cd();
+  dfly = 0.02, dfuy = 0.29;
   auto hfm2(pad2->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm2, stnx, "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm2->GetXaxis()->SetNdivisions(510);
@@ -176,7 +200,7 @@ void pp_InclSpect(){
   
   can->cd();
   pad3->cd();
-  dfly = 0.1, dfuy = .7;
+  dfly = 0.01, dfuy = .22;
  
   auto hfm3(pad3->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm3, stnx, "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
@@ -193,7 +217,7 @@ void pp_InclSpect(){
   can->cd();
   pad4->cd();
   
-  dfly = 0.01, dfuy = .25;
+  dfly = 0.0, dfuy = .07;
  
   dlsx = 0.17; dlsy = 0.17;
   dtsx = 0.17; dtsy = 0.17;
@@ -211,9 +235,9 @@ void pp_InclSpect(){
   tex4->SetTextSizePixels(22);
   tex4->DrawLatex(0.83, 0.5, "#color[419]{#Omega^{-} + #bar{#Omega}^{+}}");
 
-  auto leg4(new TLegend(0.53, 0.6, 0.85, 0.9)); SetupLegend(leg4);
-  leg4->AddEntry(gRE[0], "BLC", "LF")->SetTextSizePixels(20);
-  leg4->Draw();
+  //auto leg4(new TLegend(0.53, 0.6, 0.85, 0.9)); SetupLegend(leg4);
+  //leg4->AddEntry(gRE[0], "BLC", "LF")->SetTextSizePixels(20);
+  //leg4->Draw();
  
   can->cd();
   pad5->cd();

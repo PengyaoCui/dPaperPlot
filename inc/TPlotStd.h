@@ -96,7 +96,7 @@ TPad* MakePadTL(TString sName)
   p->SetFillColor(0);
   p->SetBorderMode(0);
   p->SetBorderSize(0);
-  p->SetRightMargin(0.);
+  p->SetRightMargin(0.0);
   p->SetLeftMargin(0.18);
   p->SetTopMargin(0.02);
   p->SetBottomMargin(0.);
@@ -196,4 +196,24 @@ TPad* MakePad(TString sName, const Double_t x1, const Double_t y1, const Double_
   return p;
 }
 
+//_____________________________________________________________________________
+TPad* MakePads(TString sName,  const Double_t x1, const Double_t y1, const Double_t x2, const Double_t y2)
+{
+  TPad *p = new TPad(Form("c%s_pads",sName.Data()), Form("c%s_s",sName.Data()), x1, y1, x2, y2);
+  p->Range(0., 0., 1., 1.);
+  p->SetFillColor(0);
+  p->SetBorderMode(0);
+  p->SetBorderSize(0);
+  p->SetRightMargin(0.03);
+  p->SetLeftMargin(0.18);
+  p->SetTopMargin(0.02);
+  p->SetBottomMargin(0.28);
+  p->SetFrameFillStyle(0);
+  p->SetFrameBorderMode(0);
+  p->SetTickx();
+  p->SetTicky();
+  p->Draw();
+  p->cd();
+  return p;
+}
 
