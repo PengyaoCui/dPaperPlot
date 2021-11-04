@@ -1,17 +1,17 @@
 #include "inc/PyJetUtils.h"
 
-void pp_Spect(){
+void pPb_Spect(){
  
   TString sp[] = {"Kshort", "Lambda_sum", "Xi", "Omega"};
   TString sc[] = {"Incl", "JC", "UE", "JE"};
   const auto np = 4;
   const auto nc = 4;
   TList* l[np]; TH1D* h[np][nc]; TGraph *gE[np][nc];
-  auto f = TFile::Open("./data/pp.root", "read");
+  auto f = TFile::Open("./data/pPb.root", "read");
 
 
   for(int p = 0; p<np; p++ ){
-    l[p] = (TList*)f->Get(sp[p]);
+    l[p] = (TList*)f->Get(Form("%s_0100", sp[p].Data()));
     h[p][0] = (TH1D*)l[p]->FindObject(Form("InclCen")); gE[p][0] = (TGraphErrors*)l[p]->FindObject(Form("Inclerr"));
     h[p][1] = (TH1D*)l[p]->FindObject(Form("JCCen"));   gE[p][1] = (TGraphErrors*)l[p]->FindObject(Form("JCerr"));
     h[p][2] = (TH1D*)l[p]->FindObject(Form("UECen"));   gE[p][2] = (TGraphErrors*)l[p]->FindObject(Form("UEerr"));
@@ -21,7 +21,7 @@ void pp_Spect(){
 
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(2e-6), dfuy(4e-1);
+  auto dfly(5e-6), dfuy(7e-1);
   
   auto dlsx(0.06), dlsy(0.06);
   auto dtsx(0.06), dtsy(0.06);
@@ -32,7 +32,7 @@ void pp_Spect(){
   
   SetStyle(kTRUE);
   gStyle->SetErrorX(0);
-  auto can(MakeCanvas("pp_Spect", 900, 800));
+  auto can(MakeCanvas("pPb_Spect", 900, 800));
 //=====Make pads===============================================================
   TPad *pad1 = new TPad("pad1", "pad1", 0., 1., 0.51, 0.51);
   pad1->Range(0., 0., 1., 1.);
@@ -117,7 +117,7 @@ void pp_Spect(){
   
   can->cd();
   pad2->cd();
-  dfly = 1e-6; dfuy=2e-1;
+  dfly = 3e-6; dfuy=2e-1;
   auto hfm2(pad2->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm2, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm2->GetXaxis()->SetNdivisions(510);
@@ -129,7 +129,7 @@ void pp_Spect(){
   
   can->cd();
   pad3->cd();
-  dfly = 8e-6; dfuy=8e-3;
+  dfly = 7e-6; dfuy=2e-2;
   auto hfm3(pad3->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm3, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm3->GetXaxis()->SetNdivisions(510);
@@ -141,7 +141,7 @@ void pp_Spect(){
 
   can->cd();
   pad4->cd();
-  dfly = 2e-5; dfuy=4e-3;
+  dfly = 2e-5; dfuy=5e-3;
   auto hfm4(pad4->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm4, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm4->GetXaxis()->SetNdivisions(510);
@@ -151,7 +151,7 @@ void pp_Spect(){
   DrawHisto(h[3][2], wcl[2], wmk[1], "same"); DrawGraph(gE[3][2], wcl[2], "E2");
   DrawHisto(h[3][3], wcl[1], wmk[3], "same"); DrawGraph(gE[3][3], wcl[1], "E2");
   
-  auto leg(new TLegend(0.44, 0.62, 0.95, 0.92)); SetupLegend(leg);
+  auto leg(new TLegend(0.45, 0.62, 0.97, 0.92)); SetupLegend(leg);
   leg->AddEntry(h[0][0], "Inclusive", "P")->SetTextSizePixels(24);
   leg->AddEntry(h[0][2], "Perp. cone", "P")->SetTextSizePixels(24);
   leg->AddEntry(h[0][1], "#it{R}(par, jet) < 0.4", "P")->SetTextSizePixels(24);
@@ -167,7 +167,7 @@ void pp_Spect(){
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(11);
-  tex->DrawLatex(0.23, 0.95, "ALICE pp #sqrt{#it{s}} = 13 TeV");
+  tex->DrawLatex(0.16, 0.95, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV");
   tex->DrawLatex(0.77, 0.95, "Particle:|#eta| < 0.75");
   tex->DrawLatex(0.27, 0.46, "Jet: anti-#it{k}_{T}, #it{R} = 0.4");
   tex->DrawLatex(0.3, 0.42, "#it{p}_{T, jet}^{ch} > 10 GeV/#it{c}");

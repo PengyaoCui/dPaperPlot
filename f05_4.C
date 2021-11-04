@@ -2,8 +2,8 @@
 
 void f05_4(){
   
-  auto f = TFile::Open("./data/pp.root", "read");
-  auto l = (TList*)f->Get("Omega");
+  auto f = TFile::Open("./data/pPb.root", "read");
+  auto l = (TList*)f->Get("Omega_0100");
   f->Close();
   TH1D *h[4]; TGraph *gE[4];
   h[0] = (TH1D*)l->FindObject(Form("InclCen")); gE[0] = (TGraphErrors*)l->FindObject(Form("Inclerr"));
