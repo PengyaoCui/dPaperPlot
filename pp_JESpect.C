@@ -52,9 +52,12 @@ void pp_JESpect(){
       hR[p][i] = MakeRebinTH1D(hR[p][i], h[p]);
       hR[p][i]->Divide(h[p]);
       NormBinningHistogram(hR[p][i]);
-      hRm[i] = hR[p][i];
+      //hRm[i] = hR[p][i];
       //gR[p][i] = new TGraph(hR[p][i]); 
     }
+    hRm[0] = hR[p][0];
+    hRm[1] = hR[p][2];
+    hRm[2] = hR[p][3];
     hMax[p] = MaxHistograms(3, hRm);
     hMin[p] = MinHistograms(3, hRm);
     hMid[p] = (TH1D*)hMax[p]->Clone(Form("mid_%s", sp[np].Data()));

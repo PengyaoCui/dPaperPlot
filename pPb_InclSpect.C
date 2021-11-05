@@ -39,9 +39,9 @@ void pPb_InclSpect(){
 
 //pythia to Data ratio
 //=============================================================================
-  TH1D* hR[np][nm]; TH1D* hMax[np]; TH1D* hMin[np]; TH1D* hMid[np]; TH1D* hRm[nm];
+  TH1D* hR[np][nm]; TH1D* hMax[np]; TH1D* hMin[np]; TH1D* hMid[np]; TH1D* hRm[nm-1];
   TH1D* hRE[np]; TGraph*gR[np][nm]; TGraphErrors*gRE[np];
-  TH1D* hPym[nm];TH1D* hPyMid[nm]; TH1D* hPyMin[nm]; TH1D* hPyMax[nm]; TGraphErrors*gPyE[np];
+  TH1D* hPym[nm-1];TH1D* hPyMid[np]; TH1D* hPyMin[np]; TH1D* hPyMax[np]; TGraphErrors*gPyE[np];
   for(int p = 0; p<np; p++ ){
     for (auto i=0; i<nm; ++i){
       hR[p][i] = (TH1D*)hPy[p][i]->Clone(Form("%s_%s", sp[np].Data(), sm[i].Data()));
@@ -49,10 +49,16 @@ void pPb_InclSpect(){
       hR[p][i] = MakeRebinTH1D(hR[p][i], h[p]);
       hR[p][i]->Divide(h[p]);
       NormBinningHistogram(hR[p][i]);
-      hRm[i] = hR[p][i];
-      hPym[i] = hPy[p][i];
+      //hRm[i] = hR[p][i];
+      //hPym[i] = hPy[p][i];
       //gR[p][i] = new TGraph(hR[p][i]); 
     }
+    hRm[0] = hR[p][0];
+    hRm[1] = hR[p][2];
+    hRm[2] = hR[p][3];
+    hPym[0] = hPy[p][0];
+    hPym[1] = hPy[p][2];
+    hPym[2] = hPy[p][3];
     hPyMax[p] = MaxHistograms(3, hPym);
     hPyMin[p] = MinHistograms(3, hPym);
     hPyMid[p] = (TH1D*)hPyMax[p]->Clone(Form("Pymid_%s", sp[np].Data()));
@@ -136,6 +142,7 @@ void pPb_InclSpect(){
     //  if(i !=1 ) DrawGraph(g[p][i],  wcl[p], "C");
     //
     //}
+    //DrawGraphError(gPyE[p],  wcl[p], wcl[p], "E3 C");
     DrawGraphError(gPyE[p],  wcl[p], wcl[p], "E3 C");
   }
 
@@ -228,7 +235,8 @@ void pPb_InclSpect(){
   hfm4->GetYaxis()->SetNdivisions(503);
   hfm4->GetXaxis()->SetTickLength(0.07);
   
-  DrawGraphError(gRE[3],  wcl[3], wcl[3], "E3 C");
+  //DrawGraphError(gRE[3],  wcl[3], wcl[3], "E3 C");
+  DrawGraphError(gRE[3],  wcl[3], wcl[3], "E3");
   
   auto tex4(new TLatex());
   tex4->SetNDC();

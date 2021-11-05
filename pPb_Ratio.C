@@ -1,17 +1,17 @@
 #include "inc/PyJetUtils.h"
 
-void pp_Ratio(){
+void pPb_Ratio(){
  
   TString sp[] = {"Lambda_sum_toKRatio", "Xi_toKRatio", "Omega_toKRatio", "Xi_toLRatio", "Omega_toLRatio", "Omega_toXRatio"};
   TString sc[] = {"Incl", "JC", "UE", "JE"};
   const auto np = 6;
   const auto nc = 4;
   TList* l[np]; TH1D* h[np][nc]; TGraph *gE[np][nc];
-  auto f = TFile::Open("./data/pp.root", "read");
+  auto f = TFile::Open("./data/pPb.root", "read");
 
 
   for(int p = 0; p<np; p++ ){
-    l[p] = (TList*)f->Get(sp[p]);
+    l[p] = (TList*)f->Get(Form("%s_0100",sp[p].Data()));
     h[p][0] = (TH1D*)l[p]->FindObject(Form("hInR"));   gE[p][0] = (TGraphErrors*)l[p]->FindObject(Form("InRerr"));
     h[p][1] = (TH1D*)l[p]->FindObject(Form("hJCR"));   gE[p][1] = (TGraphErrors*)l[p]->FindObject(Form("JCRerr"));
     h[p][2] = (TH1D*)l[p]->FindObject(Form("hUER"));   gE[p][2] = (TGraphErrors*)l[p]->FindObject(Form("UERerr"));
@@ -21,7 +21,7 @@ void pp_Ratio(){
 
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(0.07), dfuy(0.62);
+  auto dfly(0.03), dfuy(0.7);
   
   auto dlsx(0.07), dlsy(0.07);
   auto dtsx(0.07), dtsy(0.07);
@@ -32,7 +32,7 @@ void pp_Ratio(){
   
   SetStyle(kTRUE);
   gStyle->SetErrorX(0);
-  auto can(MakeCanvas("pp_Ratio", 1200, 700));
+  auto can(MakeCanvas("pPb_Ratio", 1200, 700));
 //=====Make pads===============================================================
 
   auto pad1(MakePads("pad1", 0.04, 1., 0.36, 0.52)); can->cd(); 
@@ -56,7 +56,7 @@ void pp_Ratio(){
   
   can->cd();
   pad2->cd();
-  dfly = 0.0001; dfuy=0.11;
+  dfly = 0.0001; dfuy=0.16;
   auto hfm2(pad2->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm2, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm2->GetXaxis()->SetNdivisions(510);
@@ -68,7 +68,7 @@ void pp_Ratio(){
   
   can->cd();
   pad3->cd();
-  dfly = 0.; dfuy=.024;
+  dfly = 0.; dfuy=.049;
   auto hfm3(pad3->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm3, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm3->GetXaxis()->SetNdivisions(510);
@@ -80,7 +80,7 @@ void pp_Ratio(){
 
   can->cd();
   pad4->cd();
-  dfly = 0.04; dfuy=0.23;
+  dfly = 0.02; dfuy=0.32;
   auto hfm4(pad4->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm4, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm4->GetXaxis()->SetNdivisions(510);
@@ -92,7 +92,7 @@ void pp_Ratio(){
  
   can->cd();
   pad5->cd();
-  dfly = 0.; dfuy=0.07;
+  dfly = 0.; dfuy=0.09;
   auto hfm5(pad5->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm5, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm5->GetXaxis()->SetNdivisions(510);
@@ -104,7 +104,7 @@ void pp_Ratio(){
 
   can->cd();
   pad6->cd();
-  dfly = 0.; dfuy=.35;
+  dfly = 0.1; dfuy=.45;
   auto hfm6(pad6->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm6, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm6->GetXaxis()->SetNdivisions(510);
@@ -138,7 +138,7 @@ void pp_Ratio(){
 
   tex->DrawLatex(0.5, 0.02, stnx);
   
-  tex->DrawLatex(0.28, 0.63, "#frac{#Lambda + #bar{#Lambda}}{2K^{0}_{S}}");
+  tex->DrawLatex(0.24, 0.63, "#frac{#Lambda + #bar{#Lambda}}{2K^{0}_{S}}");
   tex->DrawLatex(0.60, 0.63, "#frac{#Xi^{-} + #bar{#Xi}^{+}}{2K^{0}_{S}}");
   tex->DrawLatex(0.91, 0.63, "#frac{#Omega^{-} + #bar{#Omega}^{+}}{2K^{0}_{S}}");
   tex->DrawLatex(0.28, 0.15, "#frac{#Xi^{-} + #bar{#Xi}^{+}}{#Lambda + #bar{#Lambda}}");

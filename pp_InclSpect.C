@@ -38,7 +38,7 @@ void pp_InclSpect(){
 
 //pythia to Data ratio
 //=============================================================================
-  TH1D* hR[np][nm]; TH1D* hMax[np]; TH1D* hMin[np]; TH1D* hMid[np]; TH1D* hRm[nm];
+  TH1D* hR[np][nm]; TH1D* hMax[np]; TH1D* hMin[np]; TH1D* hMid[np]; TH1D* hRm[nm-1];
   TH1D* hRE[np]; TGraph*gR[np][nm]; TGraphErrors*gRE[np];
   for(int p = 0; p<np; p++ ){
     for (auto i=0; i<nm; ++i){
@@ -47,9 +47,12 @@ void pp_InclSpect(){
       hR[p][i] = MakeRebinTH1D(hR[p][i], h[p]);
       hR[p][i]->Divide(h[p]);
       NormBinningHistogram(hR[p][i]);
-      hRm[i] = hR[p][i];
+      //hRm[i] = hR[p][i];
       //gR[p][i] = new TGraph(hR[p][i]); 
     }
+    hRm[0] = hR[p][0];
+    hRm[1] = hR[p][2];
+    hRm[2] = hR[p][3];
     hMax[p] = MaxHistograms(3, hRm);
     hMin[p] = MinHistograms(3, hRm);
     hMid[p] = (TH1D*)hMax[p]->Clone(Form("mid_%s", sp[np].Data()));
