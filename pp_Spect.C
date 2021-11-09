@@ -168,10 +168,10 @@ void pp_Spect(){
   tex->SetNDC();
   tex->SetTextSizePixels(11);
   tex->DrawLatex(0.23, 0.95, "ALICE pp #sqrt{#it{s}} = 13 TeV");
-  tex->DrawLatex(0.77, 0.95, "Particle:|#eta| < 0.75");
+  tex->DrawLatex(0.77, 0.95, "Particle:|#it{#eta}| < 0.75");
   tex->DrawLatex(0.27, 0.46, "Jet: anti-#it{k}_{T}, #it{R} = 0.4");
   tex->DrawLatex(0.3, 0.42, "#it{p}_{T, jet}^{ch} > 10 GeV/#it{c}");
-  tex->DrawLatex(0.36, 0.38, "|#eta_{jet}| < 0.35");
+  tex->DrawLatex(0.36, 0.38, "|#it{#eta}_{jet}| < 0.35");
 
   tex->DrawLatex(0.25, 0.02, stnx);
   tex->DrawLatex(0.73, 0.02, stnx);

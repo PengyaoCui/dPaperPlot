@@ -101,7 +101,7 @@ void pPb_JESpect(){
 
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(5e-5), dfuy(4e0);
+  auto dfly(5e-5), dfuy(8e0);
 
   auto dlsx(0.045), dlsy(0.045);
   auto dtsx(0.045), dtsy(0.045);
@@ -144,35 +144,32 @@ void pPb_JESpect(){
     //  if(i !=1 ) DrawGraph(g[p][i],  wcl[p], "C");
     //
     //}
-    DrawGraphError(gPyE[p],  wcl[p], wcl[p], "E3 C");
+    DrawGraphError(gPyE[p],  wcl[p], wcl[p], "E3");
   }
 
 
-  auto leg(new TLegend(0.7, 0.8, 0.95, 0.87)); SetupLegend(leg);
+  //auto leg(new TLegend(0.7, 0.8, 0.95, 0.87)); SetupLegend(leg);
+  auto leg(new TLegend(0.7, 0.58, 0.95, 0.87)); SetupLegend(leg);
   //leg->SetNColumns(2);
-  leg->AddEntry(gPyE[0], "BLC", "LF")->SetTextSizePixels(20);
-  //leg->AddEntry(h[0], "#color[1]{K^{0}_{S} (#times 16)}", "P")->SetTextSizePixels(20);
-  //leg->AddEntry(h[1], "#color[633]{#Lambda + #bar{#Lambda} (#times 4)}", "P")->SetTextSizePixels(20);
-  //leg->AddEntry(h[2], "#color[601]{#Xi^{-} + #bar{#Xi}^{+} (#times 2)}", "P")->SetTextSizePixels(20);
-  //leg->AddEntry(h[3], "#color[419]{#Omega^{-} + #bar{#Omega}^{+}}", "P")->SetTextSizePixels(20);
-  //leg->AddEntry(h[0], "PYTHIA 8", "")->SetTextSizePixels(20);
-  //leg->AddEntry(g[0][0], "BLC mode 0", "L")->SetTextSizePixels(20);
-  //leg->AddEntry(g[0][2], "BLC mode 2", "L")->SetTextSizePixels(20);
-  //leg->AddEntry(g[0][3], "BLC mode 3", "L")->SetTextSizePixels(20);
+  leg->AddEntry(h[0], "#color[1]{K^{0}_{S} (#times 16)}", "P")->SetTextSizePixels(20);
+  leg->AddEntry(h[1], "#color[633]{#Lambda + #bar{#Lambda} (#times 4)}", "P")->SetTextSizePixels(20);
+  leg->AddEntry(h[2], "#color[601]{#Xi^{-} + #bar{#Xi}^{+} (#times 2)}", "P")->SetTextSizePixels(20);
+  leg->AddEntry(h[3], "#color[419]{#Omega^{-} + #bar{#Omega}^{+}}", "P")->SetTextSizePixels(20);
   leg->Draw();
+  auto Leg(new TLegend(0.48, 0.85, 0.75, 0.78)); SetupLegend(Leg);
+  Leg->AddEntry(gPyE[0], "CR-BLC", "F")->SetTextSizePixels(20);
+  Leg->Draw();
 
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(22);
-  tex->DrawLatex(0.32, 0.9, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV, |#eta| < 0.75");
+  //tex->DrawLatex(0.32, 0.9, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV, |#it{#eta}| < 0.75");
+  tex->DrawLatex(0.15, 0.91, "ALICE p#minusPb #sqrt{#it{s}_{NN}} = 5.02 TeV");
+  tex->DrawLatex(0.68, 0.91, "Particle in jets");
 
-  tex->DrawLatex(0.68, 0.75, Form("Particle in jets"));
+  //tex->DrawLatex(0.68, 0.75, Form("Particle in jets"));
 
-  tex->DrawLatex(0.83, 0.61, "K^{0}_{S}");
-  tex->DrawLatex(0.74, 0.47, "#color[633]{#Lambda + #bar{#Lambda}}");
-  tex->DrawLatex(0.63, 0.25, "#color[601]{#Xi^{-} + #bar{#Xi}^{+}}");
-  tex->DrawLatex(0.55, 0.13, "#color[419]{#Omega^{-} + #bar{#Omega}^{+}}");
-  //tex->DrawLatex(0.16, 0.3, "#it{R}(par, jet) < 0.4, |#eta_{par}| < 0.75");
+  //tex->DrawLatex(0.16, 0.3, "#it{R}(par, jet) < 0.4, |#it{#eta}_{par}| < 0.75");
 
   can->cd();
   pad1->cd();
@@ -190,7 +187,7 @@ void pPb_JESpect(){
   hfm1->GetYaxis()->SetNdivisions(503);
   hfm1->GetXaxis()->SetTickLength(0.07);
 
-  DrawGraphError(gRE[0],  wcl[0], wcl[0], "E3 C");
+  DrawGraphError(gRE[0],  wcl[0], wcl[0], "E3");
   
   auto tex1(new TLatex());
   tex1->SetNDC();
@@ -207,7 +204,7 @@ void pPb_JESpect(){
   hfm2->GetYaxis()->SetNdivisions(503);
   hfm2->GetXaxis()->SetTickLength(0.07);
   
-  DrawGraphError(gRE[1],  wcl[1], wcl[1], "E3 C");
+  DrawGraphError(gRE[1],  wcl[1], wcl[1], "E3");
   
   auto tex2(new TLatex());
   tex2->SetNDC();
@@ -223,7 +220,7 @@ void pPb_JESpect(){
   hfm3->GetXaxis()->SetNdivisions(510);
   hfm3->GetYaxis()->SetNdivisions(503);
   hfm3->GetXaxis()->SetTickLength(0.07);
-  DrawGraphError(gRE[2],  wcl[2], wcl[2], "E3 C");
+  DrawGraphError(gRE[2],  wcl[2], wcl[2], "E3");
   
   auto tex3(new TLatex());
   tex3->SetNDC();
@@ -244,7 +241,7 @@ void pPb_JESpect(){
   hfm4->GetYaxis()->SetNdivisions(503);
   hfm4->GetXaxis()->SetTickLength(0.07);
   
-  DrawGraphError(gRE[3],  wcl[3], wcl[3], "E3 C");
+  DrawGraphError(gRE[3],  wcl[3], wcl[3], "E3");
   
   auto tex4(new TLatex());
   tex4->SetNDC();
@@ -252,7 +249,7 @@ void pPb_JESpect(){
   tex4->DrawLatex(0.83, 0.5, "#color[419]{#Omega^{-} + #bar{#Omega}^{+}}");
 
   //auto leg4(new TLegend(0.53, 0.6, 0.85, 0.9)); SetupLegend(leg4);
-  //leg4->AddEntry(gRE[0], "BLC", "LF")->SetTextSizePixels(20);
+  //leg4->AddEntry(gRE[0], "CR-BLC", "LF")->SetTextSizePixels(20);
   //leg4->Draw();
  
   can->cd();

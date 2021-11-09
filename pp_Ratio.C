@@ -131,10 +131,10 @@ void pp_Ratio(){
   tex->SetNDC();
   tex->SetTextSizePixels(11);
   tex->DrawLatex(0.47, 0.94, "ALICE pp #sqrt{#it{s}} = 13 TeV");
-  tex->DrawLatex(0.81, 0.94, "Particle:|#eta| < 0.75");
+  tex->DrawLatex(0.81, 0.94, "Particle:|#it{#eta}| < 0.75");
   tex->DrawLatex(0.50, 0.45, "Jet: anti-#it{k}_{T}, #it{R} = 0.4");
   tex->DrawLatex(0.52, 0.4, "#it{p}_{T, jet}^{ch} > 10 GeV/#it{c}");
-  tex->DrawLatex(0.56, 0.35, "|#eta_{jet}| < 0.35");
+  tex->DrawLatex(0.56, 0.35, "|#it{#eta}_{jet}| < 0.35");
 
   tex->DrawLatex(0.5, 0.02, stnx);
   

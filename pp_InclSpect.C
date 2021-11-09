@@ -75,7 +75,7 @@ void pp_InclSpect(){
 
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(2e-6), dfuy(2e0);
+  auto dfly(7e-7), dfuy(4e0);
 
   auto dlsx(0.045), dlsy(0.045);
   auto dtsx(0.045), dtsy(0.045);
@@ -121,22 +121,26 @@ void pp_InclSpect(){
   }
 
 
-  auto leg(new TLegend(0.4, 0.63, 0.95, 0.87)); SetupLegend(leg);
-  leg->SetNColumns(2);
+  auto leg(new TLegend(0.36, 0.63, 0.61, 0.87)); SetupLegend(leg);
+  //leg->SetNColumns(2);
   leg->AddEntry(h[0], "#color[1]{K^{0}_{S} (#times 16)}", "P")->SetTextSizePixels(20);
-  leg->AddEntry(h[0], "PYTHIA 8", "")->SetTextSizePixels(20);
   leg->AddEntry(h[1], "#color[633]{#Lambda + #bar{#Lambda} (#times 4)}", "P")->SetTextSizePixels(20);
-  leg->AddEntry(g[0][0], "BLC mode 0", "L")->SetTextSizePixels(20);
   leg->AddEntry(h[2], "#color[601]{#Xi^{-} + #bar{#Xi}^{+} (#times 2)}", "P")->SetTextSizePixels(20);
-  leg->AddEntry(g[0][2], "BLC mode 2", "L")->SetTextSizePixels(20);
   leg->AddEntry(h[3], "#color[419]{#Omega^{-} + #bar{#Omega}^{+}}", "P")->SetTextSizePixels(20);
-  leg->AddEntry(g[0][3], "BLC mode 3", "L")->SetTextSizePixels(20);
   leg->Draw();
+  
+  auto Leg(new TLegend(0.61, 0.63, 0.92, 0.87)); SetupLegend(Leg);
+  Leg->SetHeader("PYTHIA 8");
+  Leg->AddEntry(g[0][0], "CR-BLC mode 0", "L")->SetTextSizePixels(20);
+  Leg->AddEntry(g[0][2], "CR-BLC mode 2", "L")->SetTextSizePixels(20);
+  Leg->AddEntry(g[0][3], "CR-BLC mode 3", "L")->SetTextSizePixels(20);
+  Leg->Draw();
 
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(22);
-  tex->DrawLatex(0.36, 0.9, "ALICE pp #sqrt{#it{s}} = 13 TeV, |#eta| < 0.75");
+  tex->DrawLatex(0.15, 0.91, "ALICE pp #sqrt{#it{s}} = 13 TeV");
+  tex->DrawLatex(0.78, 0.91, "Inclusive");
 
   can->cd();
   pad1->cd();
@@ -154,7 +158,7 @@ void pp_InclSpect(){
   hfm1->GetYaxis()->SetNdivisions(503);
   hfm1->GetXaxis()->SetTickLength(0.07);
 
-  DrawGraphError(gRE[0],  wcl[0], wcl[0], "E3 C");
+  DrawGraphError(gRE[0],  wcl[0], wcl[0], "E3");
   
   auto tex1(new TLatex());
   tex1->SetNDC();
@@ -170,7 +174,7 @@ void pp_InclSpect(){
   hfm2->GetYaxis()->SetNdivisions(503);
   hfm2->GetXaxis()->SetTickLength(0.07);
   
-  DrawGraphError(gRE[1],  wcl[1], wcl[1], "E3 C");
+  DrawGraphError(gRE[1],  wcl[1], wcl[1], "E3");
   
   auto tex2(new TLatex());
   tex2->SetNDC();
@@ -186,7 +190,7 @@ void pp_InclSpect(){
   hfm3->GetXaxis()->SetNdivisions(510);
   hfm3->GetYaxis()->SetNdivisions(503);
   hfm3->GetXaxis()->SetTickLength(0.07);
-  DrawGraphError(gRE[2],  wcl[2], wcl[2], "E3 C");
+  DrawGraphError(gRE[2],  wcl[2], wcl[2], "E3");
   
   auto tex3(new TLatex());
   tex3->SetNDC();
@@ -207,15 +211,15 @@ void pp_InclSpect(){
   hfm4->GetYaxis()->SetNdivisions(503);
   hfm4->GetXaxis()->SetTickLength(0.07);
   
-  DrawGraphError(gRE[3],  wcl[3], wcl[3], "E3 C");
+  DrawGraphError(gRE[3],  wcl[3], wcl[3], "E3");
   
   auto tex4(new TLatex());
   tex4->SetNDC();
   tex4->SetTextSizePixels(22);
   tex4->DrawLatex(0.83, 0.5, "#color[419]{#Omega^{-} + #bar{#Omega}^{+}}");
 
-  auto leg4(new TLegend(0.53, 0.6, 0.85, 0.9)); SetupLegend(leg4);
-  leg4->AddEntry(gRE[0], "BLC", "LF")->SetTextSizePixels(20);
+  auto leg4(new TLegend(0.62, 0.6, 0.88, 0.9)); SetupLegend(leg4);
+  leg4->AddEntry(gRE[0], "CR-BLC", "F")->SetTextSizePixels(20);
   leg4->Draw();
  
   can->cd();
