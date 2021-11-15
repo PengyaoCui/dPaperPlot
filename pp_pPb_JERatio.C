@@ -1,27 +1,31 @@
 #include "inc/PyJetUtils.h"
 
-void pPb_Ratio(){
+void pp_pPb_JERatio(){
  
   TString sp[] = {"Lambda_sum_toKRatio", "Xi_toKRatio", "Omega_toKRatio", "Xi_toLRatio", "Omega_toLRatio", "Omega_toXRatio"};
-  TString sc[] = {"Incl", "JC", "UE", "JE"};
+  TString sc[] = {"010", "1040", "40100", "0100"};
   const auto np = 6;
   const auto nc = 4;
-  TList* l[np]; TH1D* h[np][nc]; TGraph *gE[np][nc];
+  TList* l[np][nc+1]; TH1D* h[np][nc+1]; TGraph *gE[np][nc+1];
   auto f = TFile::Open("./data/pPb.root", "read");
+  auto fp = TFile::Open("./data/pp.root", "read");
 
 
   for(int p = 0; p<np; p++ ){
-    l[p] = (TList*)f->Get(Form("%s_0100",sp[p].Data()));
-    h[p][0] = (TH1D*)l[p]->FindObject(Form("hInR"));   gE[p][0] = (TGraphErrors*)l[p]->FindObject(Form("InRerr"));
-    h[p][1] = (TH1D*)l[p]->FindObject(Form("hJCR"));   gE[p][1] = (TGraphErrors*)l[p]->FindObject(Form("JCRerr"));
-    h[p][2] = (TH1D*)l[p]->FindObject(Form("hUER"));   gE[p][2] = (TGraphErrors*)l[p]->FindObject(Form("UERerr"));
-    h[p][3] = (TH1D*)l[p]->FindObject(Form("hJER"));   gE[p][3] = (TGraphErrors*)l[p]->FindObject(Form("JERerr"));
+    for(int c = 0; c< nc; c++){
+      l[p][c]  = (TList*)f->Get(Form("%s_%s",sp[p].Data(), sc[c].Data()));
+      h[p][c]  = (TH1D*)l[p][c]->FindObject(Form("hJER"));
+      gE[p][c] = (TGraphErrors*)l[p][c]->FindObject(Form("JERerr"));
+    }
+    l[p][nc]  = (TList*)fp->Get(sp[p].Data());
+    h[p][nc]  = (TH1D*)l[p][nc]->FindObject(Form("hJER"));
+    gE[p][nc] = (TGraphErrors*)l[p][nc]->FindObject(Form("JERerr"));
   }
   f->Close();
 
 //=============================================================================
   auto dflx(0.), dfux(12.);
-  auto dfly(0.03), dfuy(0.7);
+  auto dfly(0.03), dfuy(0.45);
   
   auto dlsx(0.07), dlsy(0.07);
   auto dtsx(0.07), dtsy(0.07);
@@ -32,7 +36,7 @@ void pPb_Ratio(){
   
   SetStyle(kTRUE);
   gStyle->SetErrorX(0);
-  auto can(MakeCanvas("pPb_Ratio", 1200, 700));
+  auto can(MakeCanvas("ppandpPb_JERatio", 1200, 700));
 //=====Make pads===============================================================
 
   auto pad1(MakePads("pad1", 0.04, 1., 0.36, 0.52)); can->cd(); 
@@ -48,47 +52,58 @@ void pPb_Ratio(){
   SetupFrame(hfm1, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm1->GetXaxis()->SetNdivisions(510);
   hfm1->GetYaxis()->SetNdivisions(505);
-  DrawHisto(h[0][0], wcl[0], wmk[0], "same"); DrawGraph(gE[0][0], wcl[0], "E2");
-  //DrawHisto(h[0][1], wcl[3], wmk[2], "same"); DrawGraph(gE[0][1], wcl[3], "E2");
-  DrawHisto(h[0][2], wcl[2], wmk[1], "same"); DrawGraph(gE[0][2], wcl[2], "E2");
-  DrawHisto(h[0][3], wcl[1], wmk[3], "same"); DrawGraph(gE[0][3], wcl[1], "E2");
+
+  DrawHisto(h[0][0], wcl[4], wmk[4], "same"); DrawGraph(gE[0][0], wcl[4], "E2");
+  DrawHisto(h[0][1], wcl[3], wmk[3], "same"); DrawGraph(gE[0][1], wcl[3], "E2");
+  DrawHisto(h[0][2], wcl[2], wmk[2], "same"); DrawGraph(gE[0][2], wcl[2], "E2");
+  DrawHisto(h[0][3], wcl[1], wmk[1], "same"); DrawGraph(gE[0][3], wcl[1], "E2");
+ 
+  DrawHisto(h[0][4], wcl[0], wmk[0], "same"); DrawGraph(gE[0][4], wcl[0], "E2");
   
   
   can->cd();
   pad2->cd();
-  dfly = 0.0001; dfuy=0.16;
+  dfly = 0.000; dfuy=0.082;
   auto hfm2(pad2->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm2, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm2->GetXaxis()->SetNdivisions(510);
   hfm2->GetYaxis()->SetNdivisions(505);
-  DrawHisto(h[1][0], wcl[0], wmk[0], "same"); DrawGraph(gE[1][0], wcl[0], "E2");
-  //DrawHisto(h[1][1], wcl[3], wmk[2], "same"); DrawGraph(gE[1][1], wcl[3], "E2");
-  DrawHisto(h[1][2], wcl[2], wmk[1], "same"); DrawGraph(gE[1][2], wcl[2], "E2");
-  DrawHisto(h[1][3], wcl[1], wmk[3], "same"); DrawGraph(gE[1][3], wcl[1], "E2");
+
+  DrawHisto(h[1][0], wcl[4], wmk[4], "same"); DrawGraph(gE[1][0], wcl[4], "E2");
+  DrawHisto(h[1][1], wcl[3], wmk[3], "same"); DrawGraph(gE[1][1], wcl[3], "E2");
+  DrawHisto(h[1][2], wcl[2], wmk[2], "same"); DrawGraph(gE[1][2], wcl[2], "E2");
+  DrawHisto(h[1][3], wcl[1], wmk[1], "same"); DrawGraph(gE[1][3], wcl[1], "E2");
+                                                                       
+  DrawHisto(h[1][4], wcl[0], wmk[0], "same"); DrawGraph(gE[1][4], wcl[0], "E2");
   
   can->cd();
   pad3->cd();
-  dfly = 0.; dfuy=.049;
+  dfly = 0.; dfuy=.031;
   auto hfm3(pad3->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm3, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm3->GetXaxis()->SetNdivisions(510);
-  hfm3->GetYaxis()->SetNdivisions(503);
-  DrawHisto(h[2][0], wcl[0], wmk[0], "same"); DrawGraph(gE[2][0], wcl[0], "E2");
+  hfm3->GetYaxis()->SetNdivisions(505);
+
+  //DrawHisto(h[2][0], wcl[0], wmk[0], "same"); DrawGraph(gE[2][0], wcl[0], "E2");
   //DrawHisto(h[2][1], wcl[3], wmk[2], "same"); DrawGraph(gE[2][1], wcl[3], "E2");
-  DrawHisto(h[2][2], wcl[2], wmk[1], "same"); DrawGraph(gE[2][2], wcl[2], "E2");
-  DrawHisto(h[2][3], wcl[1], wmk[3], "same"); DrawGraph(gE[2][3], wcl[1], "E2");
+  //DrawHisto(h[2][2], wcl[2], wmk[1], "same"); DrawGraph(gE[2][2], wcl[2], "E2");
+  DrawHisto(h[2][3], wcl[1], wmk[1], "same"); DrawGraph(gE[2][3], wcl[1], "E2");
+ 
+  DrawHisto(h[2][4], wcl[0], wmk[0], "same"); DrawGraph(gE[2][4], wcl[0], "E2");
 
   can->cd();
   pad4->cd();
-  dfly = 0.02; dfuy=0.32;
+  dfly = 0.0; dfuy=0.32;
   auto hfm4(pad4->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm4, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm4->GetXaxis()->SetNdivisions(510);
   hfm4->GetYaxis()->SetNdivisions(503);
-  DrawHisto(h[3][0], wcl[0], wmk[0], "same"); DrawGraph(gE[3][0], wcl[0], "E2");
-  //DrawHisto(h[3][1], wcl[3], wmk[2], "same"); DrawGraph(gE[3][1], wcl[3], "E2");
-  DrawHisto(h[3][2], wcl[2], wmk[1], "same"); DrawGraph(gE[3][2], wcl[2], "E2");
-  DrawHisto(h[3][3], wcl[1], wmk[3], "same"); DrawGraph(gE[3][3], wcl[1], "E2");
+  DrawHisto(h[3][0], wcl[4], wmk[4], "same"); DrawGraph(gE[3][0], wcl[4], "E2");
+  DrawHisto(h[3][1], wcl[3], wmk[3], "same"); DrawGraph(gE[3][1], wcl[3], "E2");
+  DrawHisto(h[3][2], wcl[2], wmk[2], "same"); DrawGraph(gE[3][2], wcl[2], "E2");
+  DrawHisto(h[3][3], wcl[1], wmk[1], "same"); DrawGraph(gE[3][3], wcl[1], "E2");
+                                  
+  DrawHisto(h[3][4], wcl[0], wmk[0], "same"); DrawGraph(gE[3][4], wcl[0], "E2");
  
   can->cd();
   pad5->cd();
@@ -97,28 +112,35 @@ void pPb_Ratio(){
   SetupFrame(hfm5, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm5->GetXaxis()->SetNdivisions(510);
   hfm5->GetYaxis()->SetNdivisions(503);
-  DrawHisto(h[4][0], wcl[0], wmk[0], "same"); DrawGraph(gE[4][0], wcl[0], "E2");
+  
+  //DrawHisto(h[4][0], wcl[0], wmk[0], "same"); DrawGraph(gE[4][0], wcl[0], "E2");
   //DrawHisto(h[4][1], wcl[3], wmk[2], "same"); DrawGraph(gE[4][1], wcl[3], "E2");
-  DrawHisto(h[4][2], wcl[2], wmk[1], "same"); DrawGraph(gE[4][2], wcl[2], "E2");
-  DrawHisto(h[4][3], wcl[1], wmk[3], "same"); DrawGraph(gE[4][3], wcl[1], "E2");
+  //DrawHisto(h[4][2], wcl[2], wmk[1], "same"); DrawGraph(gE[4][2], wcl[2], "E2");
+  DrawHisto(h[4][3], wcl[1], wmk[1], "same"); DrawGraph(gE[4][3], wcl[1], "E2");
+ 
+  DrawHisto(h[4][4], wcl[0], wmk[0], "same"); DrawGraph(gE[4][4], wcl[0], "E2");
 
   can->cd();
   pad6->cd();
-  dfly = 0.1; dfuy=.45;
+  dfly = 0.03; dfuy=.46;
   auto hfm6(pad6->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm6, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm6->GetXaxis()->SetNdivisions(510);
-  hfm6->GetYaxis()->SetNdivisions(503);
-  DrawHisto(h[5][0], wcl[0], wmk[0], "same"); DrawGraph(gE[5][0], wcl[0], "E2");
+  hfm6->GetYaxis()->SetNdivisions(505);
+  
+  //DrawHisto(h[5][0], wcl[0], wmk[0], "same"); DrawGraph(gE[5][0], wcl[0], "E2");
   //DrawHisto(h[5][1], wcl[3], wmk[2], "same"); DrawGraph(gE[5][1], wcl[3], "E2");
-  DrawHisto(h[5][2], wcl[2], wmk[1], "same"); DrawGraph(gE[5][2], wcl[2], "E2");
-  DrawHisto(h[5][3], wcl[1], wmk[3], "same"); DrawGraph(gE[5][3], wcl[1], "E2");
+  //DrawHisto(h[5][2], wcl[2], wmk[1], "same"); DrawGraph(gE[5][2], wcl[2], "E2");
+  DrawHisto(h[5][3], wcl[1], wmk[1], "same"); DrawGraph(gE[5][3], wcl[1], "E2");
  
-  auto leg(new TLegend(0.45, 0.6, 0.97, 0.9)); SetupLegend(leg);
-  leg->AddEntry(h[0][0], "Inclusive", "P")->SetTextSizePixels(24);
-  leg->AddEntry(h[0][2], "Perp. cone", "P")->SetTextSizePixels(24);
-  //leg->AddEntry(h[0][1], "#it{R}(par, jet) < 0.4", "P")->SetTextSizePixels(24);
-  leg->AddEntry(h[0][3], "Particle in jets", "P")->SetTextSizePixels(24);
+  DrawHisto(h[5][4], wcl[0], wmk[0], "same"); DrawGraph(gE[5][4], wcl[0], "E2");
+ 
+  auto leg(new TLegend(0.5, 0.5, 0.97, 0.9)); SetupLegend(leg);
+  leg->AddEntry(h[0][0], "0-10%", "P")->SetTextSizePixels(24);
+  leg->AddEntry(h[0][1], "10-40%", "P")->SetTextSizePixels(24);
+  leg->AddEntry(h[0][2], "40-100%", "P")->SetTextSizePixels(24);
+  leg->AddEntry(h[0][3], "MB p#minusPb", "P")->SetTextSizePixels(24);
+  leg->AddEntry(h[0][4], "MB pp", "P")->SetTextSizePixels(24);
   //leg->AddEntry(gE[0], "Sys. Error", "f")->SetTextSizePixels(24);
   leg->Draw();
 
@@ -130,7 +152,8 @@ void pPb_Ratio(){
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(11);
-  tex->DrawLatex(0.41, 0.94, "ALICE p#minusPb #sqrt{#it{s}_{NN}} = 5.02 TeV");
+  tex->DrawLatex(0.41, 0.94, "ALICE pp #sqrt{#it{s}} = 13 TeV");
+  tex->DrawLatex(0.428, 0.89, "p#minusPb #sqrt{#it{s}_{NN}} = 5.02 TeV");
   tex->DrawLatex(0.81, 0.94, "Particle:|#eta| < 0.75");
   tex->DrawLatex(0.50, 0.45, "Jet: anti-#it{k}_{T}, #it{R} = 0.4");
   tex->DrawLatex(0.52, 0.4, "#it{p}_{T, jet}^{ch} > 10 GeV/#it{c}");
