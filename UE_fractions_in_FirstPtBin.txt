@@ -1,0 +1,14 @@
+UE fraction in first p_T bin
+
+=======pp==========
+Kshort (pTbin: 0.6-1.6) = 47.0116%
+Lambda (pTbin: 0.6-1.6) = 65.5179%
+Xi     (pTbin: 0.6-1.6) = 73.3596%
+Omega  (pTbin: 0.9-2.2) = 62.0531%
+=======p--Pb==========
+Kshort (pTbin: 0.6-1.6) = 61.2997%
+Lambda (pTbin: 0.6-1.6) = 80.3599%
+Xi     (pTbin: 0.6-1.6) = 89.6385%
+Omega  (pTbin: 0.9-2.2) = 61.3894%
+
+

@@ -1,0 +1,127 @@
+#include "inc/PyJetUtils.h"
+
+void pPb_LKRatio(){
+ 
+  TString sc[] = {"010", "1040", "40100", "0100"};
+  const auto nc = 4;
+  TList* l[nc]; TH1D* h[3][nc]; TGraph *gE[3][nc];//Incl, UE, JE
+
+  auto f = TFile::Open("./data/pPb.root", "read");
+
+  for(int c = 0; c<nc; c++ ){
+    l[c] = (TList*)f->Get(Form("Lambda_sum_toKRatio_%s", sc[c].Data()));
+    h[0][c] = (TH1D*)l[c]->FindObject(Form("hInR")); gE[0][c] = (TGraphErrors*)l[c]->FindObject(Form("InRerr"));
+    h[1][c] = (TH1D*)l[c]->FindObject(Form("hUER")); gE[1][c] = (TGraphErrors*)l[c]->FindObject(Form("UERerr"));
+    h[2][c] = (TH1D*)l[c]->FindObject(Form("hJER")); gE[2][c] = (TGraphErrors*)l[c]->FindObject(Form("JERerr"));
+  }
+
+  f->Close();
+
+//=============================================================================
+  auto dflx(0.), dfux(12.4);
+  auto dfly(0.03), dfuy(0.82);
+  
+  auto dlsx(0.06), dlsy(0.06);
+  auto dtsx(0.06), dtsy(0.06);
+  auto dtox(1.20), dtoy(1.05);
+  
+  TString stnx("#it{p}_{T} (GeV/#it{c})");
+  TString stny("(#Lambda + #bar{#Lambda})/2K^{0}_{S}");
+  
+  SetStyle(kTRUE);
+  gStyle->SetErrorX(0);
+  auto can(MakeCanvas("pPb_LKRatio_wCent", 1000, 350));
+//=====Make pads===============================================================
+
+  //auto pad1(MakePads("pad1", 0.04, 1., 0.36, 0.)); pad1->SetBottomMargin(0.15); pad1->SetLeftMargin(0.12); pad1->SetRightMargin(0.03); can->cd();
+  //auto pad2(MakePads("pad2", 0.36, 1., 0.68, 0.)); pad2->SetBottomMargin(0.15); pad2->SetLeftMargin(0.12); pad2->SetRightMargin(0.03); can->cd();
+  //auto pad3(MakePads("pad3", 0.68, 1., 1.,   0.)); pad3->SetBottomMargin(0.15); pad3->SetLeftMargin(0.12); pad3->SetRightMargin(0.03); can->cd(); 
+  auto pad1(MakePads("pad1", 0.03, 1., 0.37, 0.)); pad1->SetBottomMargin(0.15); pad1->SetLeftMargin(0.12); pad1->SetRightMargin(0.); can->cd();
+  auto pad2(MakePads("pad2", 0.37, 1., 0.69, 0.)); pad2->SetBottomMargin(0.15); pad2->SetLeftMargin(0.);   pad2->SetRightMargin(0.); can->cd();
+  auto pad3(MakePads("pad3", 0.69, 1., 1.,   0.)); pad3->SetBottomMargin(0.15); pad3->SetLeftMargin(0.);   pad3->SetRightMargin(0.03); can->cd(); 
+  auto pad0 = MakePad("pad7", 0., 1., 1., 0.); pad0->SetBottomMargin(0.); pad0->SetLeftMargin(0.); can->cd();
+
+  pad1->cd();
+  auto hfm1(pad1->DrawFrame(dflx, dfly, dfux, dfuy));
+  SetupFrame(hfm1, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
+  hfm1->GetXaxis()->SetNdivisions(510);
+  hfm1->GetYaxis()->SetNdivisions(505);
+  DrawHisto(h[0][0], wcl[4], wmk[4], "same"); DrawGraph(gE[0][0], wcl[4], "E2");
+  DrawHisto(h[0][1], wcl[3], wmk[3], "same"); DrawGraph(gE[0][1], wcl[3], "E2");
+  DrawHisto(h[0][2], wcl[2], wmk[2], "same"); DrawGraph(gE[0][2], wcl[2], "E2");
+  //DrawHisto(h[0][3], wcl[1], wmk[1], "same"); DrawGraph(gE[0][3], wcl[1], "E2");
+  
+  
+  can->cd();
+  pad2->cd();
+  dflx = 0.0001;
+ // dfly = 3e-6; dfuy=4e-1;
+  auto hfm2(pad2->DrawFrame(dflx, dfly, dfux, dfuy));
+  SetupFrame(hfm2, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
+  hfm2->GetXaxis()->SetNdivisions(510);
+  hfm2->GetYaxis()->SetNdivisions(505);
+  DrawHisto(h[1][0], wcl[4], wmk[4], "same"); DrawGraph(gE[1][0], wcl[4], "E2");
+  DrawHisto(h[1][1], wcl[3], wmk[3], "same"); DrawGraph(gE[1][1], wcl[3], "E2");
+  DrawHisto(h[1][2], wcl[2], wmk[2], "same"); DrawGraph(gE[1][2], wcl[2], "E2");
+  //DrawHisto(h[0][3], wcl[1], wmk[1], "same"); DrawGraph(gE[0][3], wcl[1], "E2");
+  
+  //auto leg(new TLegend(0.41, 0.62, 0.97, 0.95)); SetupLegend(leg);
+  auto leg(new TLegend(0.15, 0.17, 0.65, 0.47)); SetupLegend(leg);
+  leg->AddEntry(h[0][0], "0-10%", "P")->SetTextSizePixels(20);
+  leg->AddEntry(h[0][1], "10-40%", "P")->SetTextSizePixels(20);
+  leg->AddEntry(h[0][2], "40-100%", "P")->SetTextSizePixels(20);
+  //leg->AddEntry(h[0][3], "MB p#minusPb", "P")->SetTextSizePixels(20);
+  leg->Draw();
+
+ 
+  can->cd();
+  pad3->cd();
+  //dfly = 2e-5; dfuy=4e-2;
+  auto hfm3(pad3->DrawFrame(dflx, dfly, dfux, dfuy));
+  SetupFrame(hfm3, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
+  hfm3->GetXaxis()->SetNdivisions(510);
+  hfm3->GetYaxis()->SetNdivisions(505);
+  DrawHisto(h[2][0], wcl[4], wmk[4], "same"); DrawGraph(gE[2][0], wcl[4], "E2");
+  DrawHisto(h[2][1], wcl[3], wmk[3], "same"); DrawGraph(gE[2][1], wcl[3], "E2");
+  DrawHisto(h[2][2], wcl[2], wmk[2], "same"); DrawGraph(gE[2][2], wcl[2], "E2");
+  //DrawHisto(h[0][3], wcl[1], wmk[1], "same"); DrawGraph(gE[0][3], wcl[1], "E2");
+
+  
+
+  can->cd();
+  pad0->cd();
+  pad0->SetFillStyle(4000);
+
+  auto tex(new TLatex());
+  tex->SetNDC();
+  tex->SetTextSizePixels(20);
+  tex->DrawLatex(0.09, 0.9, "ALICE p#minusPb #sqrt{#it{s}_{NN}} = 5.02 TeV");
+  //tex->DrawLatex(0.92, 0.9, "0-10%");
+  tex->DrawLatex(0.47, 0.9, "Particle:|#it{#eta}| < 0.75");
+  tex->DrawLatex(0.71, 0.9, "Jet: anti-#it{k}_{T}, #it{R} = 0.4");
+  tex->DrawLatex(0.71, 0.8, "#it{p}_{T, jet}^{ch} > 10 GeV/#it{c}");
+  tex->DrawLatex(0.71, 0.7, "|#it{#eta}_{jet}| < 0.35");
+
+  tex->DrawLatex(0.16, 0.03, stnx);
+  tex->DrawLatex(0.48, 0.03, stnx);
+  tex->DrawLatex(0.80, 0.03, stnx);
+  
+  tex->DrawLatex(0.26,  0.65, "Inclusive");
+  tex->DrawLatex(0.56,  0.65, "Perp. cone");
+  tex->DrawLatex(0.85,  0.65, "Particle in jets");
+
+  auto Tex(new TLatex());
+  Tex->SetNDC();
+  Tex->SetTextSizePixels(20);
+  Tex->SetTextAngle(90);
+  Tex->DrawLatex(0.021, 0.5, stny);
+
+  can->cd();  
+  can->SaveAs(Form("./figure/eps/%s.eps", can->GetName()));
+  can->SaveAs(Form("./figure/pdf/%s.pdf", can->GetName()));
+  can->SaveAs(Form("./figure/png/%s.png", can->GetName()));
+  CanvasEnd(can);
+
+  return;
+}
+

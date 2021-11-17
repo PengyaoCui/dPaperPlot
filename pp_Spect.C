@@ -16,6 +16,8 @@ void pp_Spect(){
     h[p][1] = (TH1D*)l[p]->FindObject(Form("JCCen"));   gE[p][1] = (TGraphErrors*)l[p]->FindObject(Form("JCerr"));
     h[p][2] = (TH1D*)l[p]->FindObject(Form("UECen"));   gE[p][2] = (TGraphErrors*)l[p]->FindObject(Form("UEerr"));
     h[p][3] = (TH1D*)l[p]->FindObject(Form("JECen"));   gE[p][3] = (TGraphErrors*)l[p]->FindObject(Form("JEerr"));
+    cout<<sp[p]<<" UE fraction in first p_T bin "<<h[p][2]->GetXaxis()->GetBinLowEdge(1)<<"-"<<h[p][2]->GetXaxis()->GetBinUpEdge(1)<<" = "<<(h[p][2]->GetBinContent(1)/h[p][1]->GetBinContent(1))*100.<<"%"<<endl;
+
   }
   f->Close();
 
