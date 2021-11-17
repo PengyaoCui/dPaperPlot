@@ -19,7 +19,7 @@ void pPb_XLRatio(){
 
 //=============================================================================
   auto dflx(0.), dfux(12.4);
-  auto dfly(0.0), dfuy(0.34);
+  auto dfly(0.0), dfuy(0.35);
   
   auto dlsx(0.06), dlsy(0.06);
   auto dtsx(0.06), dtsy(0.06);
@@ -46,19 +46,10 @@ void pPb_XLRatio(){
   SetupFrame(hfm1, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm1->GetXaxis()->SetNdivisions(510);
   hfm1->GetYaxis()->SetNdivisions(505);
-  DrawHisto(h[0][0], wcl[4], wmk[4], "same"); DrawGraph(gE[0][0], wcl[4], "E2");
-  DrawHisto(h[0][1], wcl[3], wmk[3], "same"); DrawGraph(gE[0][1], wcl[3], "E2");
-  DrawHisto(h[0][2], wcl[2], wmk[2], "same"); DrawGraph(gE[0][2], wcl[2], "E2");
+  DrawHisto(h[0][0], wcl[0], wmk[0], "same"); DrawGraph(gE[0][0], wcl[0], "E2");
+  DrawHisto(h[1][0], wcl[2], wmk[1], "same"); DrawGraph(gE[1][0], wcl[2], "E2");
+  DrawHisto(h[2][0], wcl[1], wmk[3], "same"); DrawGraph(gE[2][0], wcl[1], "E2");
   //DrawHisto(h[0][3], wcl[1], wmk[1], "same"); DrawGraph(gE[0][3], wcl[1], "E2");
-  
-  //auto leg(new TLegend(0.41, 0.62, 0.97, 0.95)); SetupLegend(leg);
-  auto leg(new TLegend(0.46, 0.17, 0.66, 0.47)); SetupLegend(leg);
-  leg->AddEntry(h[0][0], "0-10%", "P")->SetTextSizePixels(20);
-  leg->AddEntry(h[0][1], "10-40%", "P")->SetTextSizePixels(20);
-  leg->AddEntry(h[0][2], "40-100%", "P")->SetTextSizePixels(20);
-  //leg->AddEntry(h[0][3], "MB p#minusPb", "P")->SetTextSizePixels(20);
-  leg->Draw();
-  
   
   
   can->cd();
@@ -69,12 +60,11 @@ void pPb_XLRatio(){
   SetupFrame(hfm2, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm2->GetXaxis()->SetNdivisions(510);
   hfm2->GetYaxis()->SetNdivisions(505);
-  DrawHisto(h[1][0], wcl[4], wmk[4], "same"); DrawGraph(gE[1][0], wcl[4], "E2");
-  DrawHisto(h[1][1], wcl[3], wmk[3], "same"); DrawGraph(gE[1][1], wcl[3], "E2");
-  DrawHisto(h[1][2], wcl[2], wmk[2], "same"); DrawGraph(gE[1][2], wcl[2], "E2");
+  DrawHisto(h[0][1], wcl[0], wmk[0], "same"); DrawGraph(gE[0][1], wcl[0], "E2");
+  DrawHisto(h[1][1], wcl[2], wmk[1], "same"); DrawGraph(gE[1][1], wcl[2], "E2");
+  DrawHisto(h[2][1], wcl[1], wmk[3], "same"); DrawGraph(gE[2][1], wcl[1], "E2");
   //DrawHisto(h[0][3], wcl[1], wmk[1], "same"); DrawGraph(gE[0][3], wcl[1], "E2");
   
-
  
   can->cd();
   pad3->cd();
@@ -83,10 +73,18 @@ void pPb_XLRatio(){
   SetupFrame(hfm3, "", "", dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm3->GetXaxis()->SetNdivisions(510);
   hfm3->GetYaxis()->SetNdivisions(505);
-  DrawHisto(h[2][0], wcl[4], wmk[4], "same"); DrawGraph(gE[2][0], wcl[4], "E2");
-  DrawHisto(h[2][1], wcl[3], wmk[3], "same"); DrawGraph(gE[2][1], wcl[3], "E2");
-  DrawHisto(h[2][2], wcl[2], wmk[2], "same"); DrawGraph(gE[2][2], wcl[2], "E2");
-  //DrawHisto(h[0][3], wcl[1], wmk[1], "same"); DrawGraph(gE[0][3], wcl[1], "E2");
+  DrawHisto(h[0][2], wcl[0], wmk[0], "same"); DrawGraph(gE[0][2], wcl[0], "E2");
+  DrawHisto(h[1][2], wcl[2], wmk[1], "same"); DrawGraph(gE[1][2], wcl[2], "E2");
+  DrawHisto(h[2][2], wcl[1], wmk[3], "same"); DrawGraph(gE[2][2], wcl[1], "E2");
+  
+  //auto leg(new TLegend(0.41, 0.62, 0.97, 0.95)); SetupLegend(leg);
+  auto leg(new TLegend(0.50, 0.75, 0.9, 0.95)); SetupLegend(leg);
+  leg->AddEntry(h[0][0], "Inclusive", "P")->SetTextSizePixels(18);
+  leg->AddEntry(h[1][0], "Perp. cone", "P")->SetTextSizePixels(18);
+  leg->AddEntry(h[2][0], "Particle in jets", "P")->SetTextSizePixels(18);
+  //leg->AddEntry(h[0][3], "MB p#minusPb", "P")->SetTextSizePixels(20);
+  leg->Draw();
+
 
 
   can->cd();
@@ -96,20 +94,20 @@ void pPb_XLRatio(){
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(20);
-  tex->DrawLatex(0.09, 0.9, "ALICE p#minusPb #sqrt{#it{s}_{NN}} = 5.02 TeV");
+  tex->DrawLatex(0.08, 0.9, "ALICE p#minusPb #sqrt{#it{s}_{NN}} = 5.02 TeV");
   //tex->DrawLatex(0.92, 0.9, "0-10%");
-  tex->DrawLatex(0.47, 0.9, "Particle:|#it{#eta}| < 0.75");
-  tex->DrawLatex(0.73, 0.9, "Jet: anti-#it{k}_{T}, #it{R} = 0.4");
-  tex->DrawLatex(0.73, 0.8, "#it{p}_{T, jet}^{ch} > 10 GeV/#it{c}");
-  tex->DrawLatex(0.73, 0.7, "|#it{#eta}_{jet}| < 0.35");
+  tex->DrawLatex(0.53, 0.2, "Particle:|#it{#eta}| < 0.75");
+  tex->DrawLatex(0.51, 0.9, "Jet: anti-#it{k}_{T}, #it{R} = 0.4");
+  tex->DrawLatex(0.535, 0.8, "#it{p}_{T, jet}^{ch} > 10 GeV/#it{c}");
+  tex->DrawLatex(0.58, 0.7, "|#it{#eta}_{jet}| < 0.35");
 
   tex->DrawLatex(0.16, 0.03, stnx);
   tex->DrawLatex(0.48, 0.03, stnx);
   tex->DrawLatex(0.80, 0.03, stnx);
   
-  tex->DrawLatex(0.26,  0.6, "Inclusive");
-  tex->DrawLatex(0.56,  0.6, "Perp. cone");
-  tex->DrawLatex(0.85,  0.6, "Particle in jets");
+  tex->DrawLatex(0.30,  0.6, "0-10%");
+  tex->DrawLatex(0.61,  0.6, "10-40%");
+  tex->DrawLatex(0.90,  0.6, "40-100%");
 
   auto Tex(new TLatex());
   Tex->SetNDC();
