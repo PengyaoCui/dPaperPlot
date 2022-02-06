@@ -1,0 +1,32 @@
+
+==================================
+L/K ratio
+Nsigma between MB p-Pb and pp
+pT bin(1.6-2.2) = 0.102158
+pT bin(2.2-2.8) = 1.44821
+pT bin(2.8-3.7) = 0.911926
+Average in pT bin(1.6-3.7) = 0.820764
+
+==================================
+L/K ratio
+Nsigma between 0-10% and 40-100% for p-Pb collision
+pT bin(1.6-2.2) = 0.397968
+pT bin(2.2-2.8) = 1.3763
+pT bin(2.8-3.7) = 1.64353
+Average in pT bin(1.6-3.7) = 1.13927
+
+==================================
+Xi/K ratio
+Nsigma between MB p-Pb and pp
+pT bin(1.6-2.2) = 0.0647086
+pT bin(2.2-2.8) = 0.0886665
+pT bin(2.8-3.7) = 0.0957551
+Average in pT bin(1.6-3.7) = 0.0830434
+==================================
+
+Xi/K ratio
+Nsigma between 0-10% and 40-100% for p-Pb collision
+pT bin(1.6-2.2) = 0.0126467
+pT bin(2.2-2.8) = 0.132716
+pT bin(2.8-3.7) = 0.171294
+Average in pT bin(1.6-3.7) = 0.105552
