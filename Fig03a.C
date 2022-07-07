@@ -27,7 +27,7 @@ void Fig03a(){
 
   
   TString stnx("#it{p}_{T} (GeV/#it{c})");
-  TString stny("Feed-dow fraction");
+  TString stny("Feed-down fraction");
   
   SetStyle(kTRUE);
   
@@ -56,7 +56,7 @@ void Fig03a(){
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(26);
-  tex->DrawLatex(0.16, 0.9, "ALICE pp #sqrt{#it{s}} = 13 TeV, |#eta| < 0.75");
+  tex->DrawLatex(0.16, 0.9, "ALICE pp #sqrt{#it{s}} = 13 TeV, |#it{#eta}| < 0.75");
   
   can->SaveAs(Form("./figure/eps/%s.eps", can->GetName()));
   can->SaveAs(Form("./figure/pdf/%s.pdf", can->GetName()));

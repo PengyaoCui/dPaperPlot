@@ -95,24 +95,24 @@ void FigB5(){
   tex->SetNDC();
   tex->SetTextSizePixels(20);
   tex->DrawLatex(0.08, 0.9, "ALICE p#minusPb #sqrt{#it{s}_{NN}} = 5.02 TeV");
-  //tex->DrawLatex(0.92, 0.9, "0-10%");
-  tex->DrawLatex(0.38, 0.9, "Particle:|#it{#eta}| < 0.75");
+  //tex->DrawLatex(0.92, 0.9, "0#minus10%");
+  tex->DrawLatex(0.38, 0.9, "Particle |#it{#eta}| < 0.75");
   tex->DrawLatex(0.81, 0.9, "Jet: anti-#it{k}_{T}, #it{R} = 0.4");
   tex->DrawLatex(0.835, 0.8, "#it{p}_{T, jet}^{ch} > 10 GeV/#it{c}");
   tex->DrawLatex(0.88, 0.7, "|#it{#eta}_{jet}| < 0.35");
 
   
-  tex->DrawLatex(0.30,  0.6, "0-10%");
-  tex->DrawLatex(0.61,  0.6, "10-40%");
-  tex->DrawLatex(0.90,  0.6, "40-100%");
+  tex->DrawLatex(0.30,  0.6, "0#minus10%");
+  tex->DrawLatex(0.61,  0.6, "10#minus40%");
+  tex->DrawLatex(0.90,  0.6, "40#minus100%");
   
   
   auto TEX(new TLatex());
   TEX->SetNDC();
   TEX->SetTextSizePixels(22);
-  TEX->DrawLatex(0.16, 0.03, stnx);
-  TEX->DrawLatex(0.48, 0.03, stnx);
-  TEX->DrawLatex(0.80, 0.03, stnx);
+  //TEX->DrawLatex(0.16, 0.03, stnx);
+  //TEX->DrawLatex(0.48, 0.03, stnx);
+  TEX->DrawLatex(0.89, 0.03, stnx);
 
   auto Tex(new TLatex());
   Tex->SetNDC();

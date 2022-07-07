@@ -61,7 +61,8 @@ void Fig01d(){
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(26);
-  tex->DrawLatex(0.16, 0.9, "ALICE p-Pb #sqrt{#it{s}_{NN}} = 5.02 TeV, |#eta| < 0.75");
+  tex->DrawLatex(0.16, 0.9, "ALICE p#minusPb #sqrt{#it{s}_{NN}} = 5.02 TeV");
+  tex->DrawLatex(0.16, 0.8, "|#it{#eta}| < 0.75");
   tex->DrawLatex(0.78, 0.9, "#Omega^{-} #rightarrow #LambdaK^{-}");
   tex->DrawLatex(0.62, 0.8, "1.2 < #it{p}_{T} < 1.6 GeV/#it{c}");
 

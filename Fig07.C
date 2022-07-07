@@ -139,6 +139,9 @@ void Fig07(){
   DrawGraphError(gIn[1],  wcl[0], wcl[0], "E3");
   DrawGraphError(gJE[1],  wcl[1], wcl[1], "E3");
   
+  auto Leg(new TLegend(0.62, 0.8, 0.95, 0.9)); SetupLegend(Leg);
+  Leg->AddEntry(gIn[3], "CR-BLC", "F")->SetTextSizePixels(24);
+  Leg->Draw();
   can->cd();
   pad3->cd();
   dfly = 0.; dfuy=.024;
@@ -183,10 +186,7 @@ void Fig07(){
   
   auto leg(new TLegend(0.45, 0.6, 0.97, 0.9)); SetupLegend(leg);
   leg->AddEntry(h[0][0], "Inclusive", "P")->SetTextSizePixels(24);
-  //leg->AddEntry(h[0][2], "Perp. cone", "P")->SetTextSizePixels(24);
-  //leg->AddEntry(h[0][1], "#it{R}(par, jet) < 0.4", "P")->SetTextSizePixels(24);
   leg->AddEntry(h[0][3], "Particle in jets", "P")->SetTextSizePixels(24);
-  //leg->AddEntry(gE[0], "Sys. Error", "f")->SetTextSizePixels(24);
   leg->Draw();
 
   can->cd();
@@ -213,7 +213,7 @@ void Fig07(){
   tex->SetNDC();
   tex->SetTextSizePixels(11);
   tex->DrawLatex(0.1, 0.94, "ALICE pp #sqrt{#it{s}} = 13 TeV");
-  tex->DrawLatex(0.81, 0.94, "Particle:|#it{#eta}| < 0.75");
+  tex->DrawLatex(0.81, 0.94, "Particle |#it{#eta}| < 0.75");
   tex->DrawLatex(0.825, 0.45, "Jet: anti-#it{k}_{T}, #it{R} = 0.4");
   tex->DrawLatex(0.845, 0.4, "#it{p}_{T, jet}^{ch} > 10 GeV/#it{c}");
   tex->DrawLatex(0.89, 0.35, "|#it{#eta}_{jet}| < 0.35");
@@ -229,7 +229,7 @@ void Fig07(){
   auto TEX(new TLatex());
   TEX->SetNDC();
   TEX->SetTextSizePixels(13);
-  TEX->DrawLatex(0.5, 0.02, stnx);
+  TEX->DrawLatex(0.89, 0.02, stnx);
 
   auto Tex(new TLatex());
   Tex->SetNDC();
@@ -237,7 +237,7 @@ void Fig07(){
   Tex->SetTextAngle(90);
   Tex->DrawLatex(0.03, 0.63, stny);
   stny="Baryon-to-baryon ratio";
-  Tex->DrawLatex(0.03, 0.15, stny);
+  Tex->DrawLatex(0.03, 0.14, stny);
 
   can->cd();  
   can->SaveAs(Form("./figure/eps/%s.eps", can->GetName()));

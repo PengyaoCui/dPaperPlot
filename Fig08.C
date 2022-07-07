@@ -169,7 +169,7 @@ void Fig08(){
   tex->SetNDC();
   tex->SetTextSizePixels(11);
   tex->DrawLatex(0.16, 0.95, "ALICE p#minusPb #sqrt{#it{s}_{NN}} = 5.02 TeV");
-  tex->DrawLatex(0.77, 0.95, "Particle:|#it{#eta}| < 0.75");
+  tex->DrawLatex(0.77, 0.95, "Particle |#it{#eta}| < 0.75");
   tex->DrawLatex(0.27, 0.46, "Jet: anti-#it{k}_{T}, #it{R} = 0.4");
   tex->DrawLatex(0.3, 0.42, "#it{p}_{T, jet}^{ch} > 10 GeV/#it{c}");
   tex->DrawLatex(0.36, 0.38, "|#it{#eta}_{jet}| < 0.35");
@@ -184,15 +184,15 @@ void Fig08(){
   auto TEX(new TLatex());
   TEX->SetNDC();
   TEX->SetTextSizePixels(13);
-  TEX->DrawLatex(0.25, 0.02, stnx);
-  TEX->DrawLatex(0.73, 0.02, stnx);
+  TEX->DrawLatex(0.38, 0.02, stnx);
+  TEX->DrawLatex(0.86, 0.02, stnx);
   
   auto Tex(new TLatex());
   Tex->SetNDC();
   Tex->SetTextSizePixels(13);
   Tex->SetTextAngle(90);
-  Tex->DrawLatex(0.03, 0.7, stny);
-  Tex->DrawLatex(0.03, 0.2, stny);
+  Tex->DrawLatex(0.03, 0.71, stny);
+  Tex->DrawLatex(0.03, 0.22, stny);
 
   can->cd();  
   can->SaveAs(Form("./figure/eps/%s.eps", can->GetName()));

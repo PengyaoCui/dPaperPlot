@@ -22,8 +22,8 @@ void Fig02a(){
   auto dflx(0.), dfux(12.);
   auto dfly(0.0001), dfuy(0.58);
   
-  auto dlsx(0.07), dlsy(0.07);
-  auto dtsx(0.08), dtsy(0.08);
+  auto dlsx(0.06), dlsy(0.06);
+  auto dtsx(0.06), dtsy(0.06);
   auto dtox(1.30), dtoy(0.70);
   
   TString stnx("#it{p}_{T} (GeV/#it{c})");
@@ -31,7 +31,7 @@ void Fig02a(){
   
   SetStyle(kTRUE);
   
-  auto can(MakeCanvas("Fig02a", 700, 600));
+  auto can(MakeCanvas("Fig02a", 700, 700));
   auto padT = MakePadT("padT"); can->cd();
   auto padB = MakePadB("padB"); can->cd();
   padT->cd(); 
@@ -60,15 +60,15 @@ void Fig02a(){
   auto tex(new TLatex());
   tex->SetNDC();
   tex->SetTextSizePixels(22);
-  tex->DrawLatex(0.16, 0.89, "ALICE pp #sqrt{#it{s}} = 13 TeV, |#eta| < 0.75");
-  tex->DrawLatex(0.16, 0.78, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#eta_{jet}| < 0.35");
+  tex->DrawLatex(0.16, 0.89, "ALICE pp #sqrt{#it{s}} = 13 TeV, |#it{#eta}| < 0.75");
+  tex->DrawLatex(0.16, 0.78, "Jet: anti-#it{k}_{T}, #it{R} = 0.4, #it{p}_{T, jet}^{ch} > 10 GeV/#it{c}, |#it{#eta}_{jet}| < 0.35");
 
   can->cd();
   padB->cd(); 
   dfly = 0.8, dfuy = 1.5999;
   
-  dlsx = 0.14; dlsy = 0.14;
-  dtsx = 0.14; dtsy = 0.14;
+  dlsx = 0.12; dlsy = 0.12;
+  dtsx = 0.12; dtsy = 0.12;
   dtox = 0.95; dtoy = 0.40;
   stny = "Ratio to inclusive";
   

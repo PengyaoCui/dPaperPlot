@@ -33,7 +33,7 @@ void Fig04(){
   TString stny("d#it{#rho}/d#it{p}_{T} (GeV/#it{c} rad)^{-1}");
   
   SetStyle(kTRUE);
-  gStyle->SetErrorX(0);
+  gStyle->SetErrorX(0.);
   auto can(MakeCanvas("Fig04", 900, 800));
 //=====Make pads===============================================================
   TPad *pad1 = new TPad("pad1", "pad1", 0., 1., 0.52, 0.52);
@@ -170,7 +170,7 @@ void Fig04(){
   tex->SetNDC();
   tex->SetTextSizePixels(11);
   tex->DrawLatex(0.23, 0.95, "ALICE pp #sqrt{#it{s}} = 13 TeV");
-  tex->DrawLatex(0.77, 0.95, "Particle:|#it{#eta}| < 0.75");
+  tex->DrawLatex(0.77, 0.95, "Particle |#it{#eta}| < 0.75");
   tex->DrawLatex(0.27, 0.46, "Jet: anti-#it{k}_{T}, #it{R} = 0.4");
   tex->DrawLatex(0.3, 0.42, "#it{p}_{T, jet}^{ch} > 10 GeV/#it{c}");
   tex->DrawLatex(0.36, 0.38, "|#it{#eta}_{jet}| < 0.35");
@@ -178,8 +178,8 @@ void Fig04(){
   auto TEX(new TLatex());
   TEX->SetNDC();
   TEX->SetTextSizePixels(14);
-  TEX->DrawLatex(0.25, 0.03, stnx);
-  TEX->DrawLatex(0.73, 0.03, stnx);
+  TEX->DrawLatex(0.38, 0.03, stnx);
+  TEX->DrawLatex(0.86, 0.03, stnx);
   
   tex->DrawLatex(0.125, 0.6, "K^{0}_{S}");
   tex->DrawLatex(0.59, 0.6, "#Lambda + #bar{#Lambda}");
@@ -191,7 +191,7 @@ void Fig04(){
   Tex->SetTextSizePixels(14);
   Tex->SetTextAngle(90);
   Tex->DrawLatex(0.03, 0.7, stny);
-  Tex->DrawLatex(0.03, 0.2, stny);
+  Tex->DrawLatex(0.03, 0.22, stny);
 
   can->cd();  
   can->SaveAs(Form("./figure/eps/%s.eps", can->GetName()));

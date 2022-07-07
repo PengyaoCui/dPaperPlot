@@ -23,7 +23,7 @@ void Fig05(){
   auto dflx(0.), dfux(12.);
   auto dfly(0.07), dfuy(0.62);
   
-  auto dlsx(0.08), dlsy(0.08);
+  auto dlsx(0.07), dlsy(0.07);
   auto dtsx(0.07), dtsy(0.07);
   auto dtox(1.20), dtoy(1.05);
   
@@ -32,7 +32,7 @@ void Fig05(){
   
   SetStyle(kTRUE);
   gStyle->SetErrorX(0);
-  auto can(MakeCanvas("Fig05", 1200, 700));
+  auto can(MakeCanvas("Fig05", 1200, 600));
 //=====Make pads===============================================================
 
   auto pad1(MakePads("pad1", 0.04, 1., 0.36, 0.52)); can->cd(); 
@@ -131,15 +131,15 @@ void Fig05(){
   tex->SetNDC();
   tex->SetTextSizePixels(11);
   tex->DrawLatex(0.47, 0.94, "ALICE pp #sqrt{#it{s}} = 13 TeV");
-  tex->DrawLatex(0.81, 0.94, "Particle:|#it{#eta}| < 0.75");
+  tex->DrawLatex(0.81, 0.94, "Particle |#it{#eta}| < 0.75");
   tex->DrawLatex(0.50, 0.45, "Jet: anti-#it{k}_{T}, #it{R} = 0.4");
   tex->DrawLatex(0.52, 0.4, "#it{p}_{T, jet}^{ch} > 10 GeV/#it{c}");
   tex->DrawLatex(0.56, 0.35, "|#it{#eta}_{jet}| < 0.35");
 
   auto TEX(new TLatex());
   TEX->SetNDC();
-  TEX->SetTextSizePixels(12);
-  TEX->DrawLatex(0.5, 0.02, stnx);
+  TEX->SetTextSizePixels(11);
+  TEX->DrawLatex(0.91, 0.02, stnx);
   
   tex->DrawLatex(0.28, 0.63, "#frac{#Lambda + #bar{#Lambda}}{2K^{0}_{S}}");
   tex->DrawLatex(0.60, 0.63, "#frac{#Xi^{-} + #bar{#Xi}^{+}}{2K^{0}_{S}}");
@@ -152,9 +152,9 @@ void Fig05(){
   Tex->SetNDC();
   Tex->SetTextSizePixels(12);
   Tex->SetTextAngle(90);
-  Tex->DrawLatex(0.03, 0.63, stny);
+  Tex->DrawLatex(0.03, 0.6, stny);
   stny="Baryon-to-baryon ratio";
-  Tex->DrawLatex(0.03, 0.15, stny);
+  Tex->DrawLatex(0.03, 0.11, stny);
 
   can->cd();  
   can->SaveAs(Form("./figure/eps/%s.eps", can->GetName()));

@@ -154,7 +154,7 @@ void Fig09(){
   tex->SetTextSizePixels(11);
   tex->DrawLatex(0.41, 0.94, "ALICE pp #sqrt{#it{s}} = 13 TeV");
   tex->DrawLatex(0.428, 0.89, "p#minusPb #sqrt{#it{s}_{NN}} = 5.02 TeV");
-  tex->DrawLatex(0.81, 0.94, "Particle:|#eta| < 0.75");
+  tex->DrawLatex(0.81, 0.94, "Particle |#eta| < 0.75");
   tex->DrawLatex(0.50, 0.45, "Jet: anti-#it{k}_{T}, #it{R} = 0.4");
   tex->DrawLatex(0.52, 0.4, "#it{p}_{T, jet}^{ch} > 10 GeV/#it{c}");
   tex->DrawLatex(0.56, 0.35, "|#eta_{jet}| < 0.35");
@@ -170,7 +170,7 @@ void Fig09(){
   auto TEX(new TLatex());
   TEX->SetNDC();
   TEX->SetTextSizePixels(13);
-  TEX->DrawLatex(0.5, 0.02, stnx);
+  TEX->DrawLatex(0.9, 0.02, stnx);
   
   auto Tex(new TLatex());
   Tex->SetNDC();
